@@ -465,14 +465,7 @@ const App = () => {
       <div className="footer-brand">
         {/* ✨ اسم الشركة مع أيقونة مميزة ✨ */}
         <div className="footer-logo-text">
-          <span className="logo-icon">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M12 22c4-4 8-7.5 8-12a8 8 0 1 0-16 0c0 4.5 4 8 8 12z"/>
-              <path d="M12 22c-2.5-2.5-4.5-5-5.5-8"/>
-              <path d="M12 22c2.5-2.5 4.5-5 5.5-8"/>
-              <path d="M12 14c-1.5-1.5-3-3-3-5a3 3 0 1 1 6 0c0 2-1.5 3.5-3 5z"/>
-            </svg>
-          </span>
+        
           <span className="logo-name">
             MS <span className="logo-accent">Herbs</span>
           </span>

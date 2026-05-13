@@ -1,4 +1,5 @@
 import React from "react";
+import { FaWhatsapp, FaEnvelope } from "react-icons/fa";
 
 export default function LuxuryConstructionWebsite() {
   const services = [
@@ -97,11 +98,11 @@ export default function LuxuryConstructionWebsite() {
           align-items:center;
         }
 
-        .logo{
-          font-size:30px;
-          font-weight:900;
-          letter-spacing:3px;
+        
+        .logo img{
+          height:42px;
         }
+
 
         .logo span{
           color:#ff2d55;
@@ -433,9 +434,11 @@ export default function LuxuryConstructionWebsite() {
 
       <nav className="navbar">
         <div className="container nav-content">
+          {/* LOGO */}
           <div className="logo">
-            ITAL<span>BUILD</span>
+            <img src="/photo_2026-05-13_14-06-03.jpg" alt="logo" />
           </div>
+
 
           <div className="nav-links">
             <a href="#services">Services</a>
@@ -537,7 +540,7 @@ export default function LuxuryConstructionWebsite() {
         </div>
       </section>
 
-      <section style={{paddingTop:"40px",paddingBottom:"40px"}}>
+      <section style={{ paddingTop: "40px", paddingBottom: "40px" }}>
         <div className="container">
           <div className="section-title">
             <h2>I Nostri Vantaggi</h2>
@@ -568,7 +571,7 @@ export default function LuxuryConstructionWebsite() {
         </div>
       </section>
 
-      <section style={{background:"rgba(255,255,255,0.03)"}}>
+      <section style={{ background: "rgba(255,255,255,0.03)" }}>
         <div className="container">
           <div className="section-title">
             <h2>Statistiche Aziendali</h2>
@@ -661,9 +664,9 @@ export default function LuxuryConstructionWebsite() {
             </div>
 
             <div className="features">
-              <div>📞 +39 000 000 0000</div>
-              <div>📧 contact@italbuild.com</div>
-              <div>📍 Milan, Italy</div>
+              <div>📞 +3511858486</div>
+              <div>📧  contact@edildesigndisaled.com</div>
+              <div>📍 Via Padova 31, Milano 20127</div>
             </div>
           </div>
 
@@ -679,7 +682,7 @@ export default function LuxuryConstructionWebsite() {
         </div>
       </section>
 
-      <section style={{background:"linear-gradient(to right,#09111f,#10192f)",padding:"140px 0"}}>
+      <section style={{ background: "linear-gradient(to right,#09111f,#10192f)", padding: "140px 0" }}>
         <div className="container">
           <div className="section-title">
             <h2>Processo di Lavoro</h2>
@@ -750,7 +753,7 @@ export default function LuxuryConstructionWebsite() {
         </div>
       </section>
 
-      <section style={{padding:"140px 0",background:"rgba(255,255,255,0.03)"}}>
+      <section style={{ padding: "140px 0", background: "rgba(255,255,255,0.03)" }}>
         <div className="container">
           <div className="section-title">
             <h2>I Nostri Partner</h2>
@@ -759,7 +762,7 @@ export default function LuxuryConstructionWebsite() {
             </p>
           </div>
 
-          <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(180px,1fr))",gap:"25px"}}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(180px,1fr))", gap: "25px" }}>
             <div className="stat-box"><h3>ITALCEMENTI</h3></div>
             <div className="stat-box"><h3>EURO DESIGN</h3></div>
             <div className="stat-box"><h3>LUX HOUSE</h3></div>
@@ -768,21 +771,21 @@ export default function LuxuryConstructionWebsite() {
         </div>
       </section>
 
-      <section style={{padding:"150px 0",position:"relative",overflow:"hidden"}}>
-        <div style={{position:"absolute",top:"0",left:"0",width:"400px",height:"400px",background:"rgba(255,0,85,0.15)",filter:"blur(120px)"}}></div>
-        <div style={{position:"absolute",bottom:"0",right:"0",width:"400px",height:"400px",background:"rgba(0,120,255,0.15)",filter:"blur(120px)"}}></div>
+      <section style={{ padding: "150px 0", position: "relative", overflow: "hidden" }}>
+        <div style={{ position: "absolute", top: "0", left: "0", width: "400px", height: "400px", background: "rgba(255,0,85,0.15)", filter: "blur(120px)" }}></div>
+        <div style={{ position: "absolute", bottom: "0", right: "0", width: "400px", height: "400px", background: "rgba(0,120,255,0.15)", filter: "blur(120px)" }}></div>
 
-        <div className="container" style={{textAlign:"center",position:"relative",zIndex:"2"}}>
-          <h2 style={{fontSize:"60px",marginBottom:"25px",fontWeight:"900"}}>
+        <div className="container" style={{ textAlign: "center", position: "relative", zIndex: "2" }}>
+          <h2 style={{ fontSize: "60px", marginBottom: "25px", fontWeight: "900" }}>
             Costruiamo il Futuro con Eleganza
           </h2>
 
-          <p style={{maxWidth:"850px",margin:"auto",lineHeight:"2",color:"#cfcfcf",fontSize:"18px"}}>
+          <p style={{ maxWidth: "850px", margin: "auto", lineHeight: "2", color: "#cfcfcf", fontSize: "18px" }}>
             Ogni progetto rappresenta innovazione, lusso e qualità italiana. La nostra missione è creare ambienti esclusivi che uniscono design moderno e funzionalità.
           </p>
 
-          <div style={{marginTop:"50px"}}>
-            <button className="btn btn-primary" style={{marginRight:"20px"}}>
+          <div style={{ marginTop: "50px" }}>
+            <button className="btn btn-primary" style={{ marginRight: "20px" }}>
               Richiedi Preventivo
             </button>
 
@@ -793,21 +796,21 @@ export default function LuxuryConstructionWebsite() {
         </div>
       </section>
 
-      <footer className="footer" style={{background:"#070b16",padding:"90px 0 30px"}}>
+      <footer className="footer" style={{ background: "#070b16", padding: "90px 0 30px" }}>
         <div className="container">
-          <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(220px,1fr))",gap:"40px",marginBottom:"60px",textAlign:"left"}}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(220px,1fr))", gap: "40px", marginBottom: "60px", textAlign: "left" }}>
             <div>
-              <h2 style={{fontSize:"26px",fontWeight:"900",marginBottom:"20px"}}>
-                ITAL<span style={{color:"#ff2d55"}}>BUILD</span>
+              <h2 style={{ fontSize: "26px", fontWeight: "900", marginBottom: "20px" }}>
+                ITAL<span style={{ color: "#ff2d55" }}>BUILD</span>
               </h2>
-              <p style={{color:"#9ca3af",lineHeight:"1.9",fontSize:"14px"}}>
+              <p style={{ color: "#9ca3af", lineHeight: "1.9", fontSize: "14px" }}>
                 Azienda specializzata in costruzioni moderne e ristrutturazioni di lusso con design elegante.
               </p>
             </div>
 
             <div>
-              <h3 style={{marginBottom:"20px",fontSize:"17px"}}>Servizi</h3>
-              <div style={{display:"flex",flexDirection:"column",gap:"14px",color:"#9ca3af",fontSize:"14px"}}>
+              <h3 style={{ marginBottom: "20px", fontSize: "17px" }}>Servizi</h3>
+              <div style={{ display: "flex", flexDirection: "column", gap: "14px", color: "#9ca3af", fontSize: "14px" }}>
                 <span>Costruzioni Moderne</span>
                 <span>Ristrutturazioni</span>
                 <span>Design Interni</span>
@@ -816,8 +819,8 @@ export default function LuxuryConstructionWebsite() {
             </div>
 
             <div>
-              <h3 style={{marginBottom:"20px",fontSize:"17px"}}>Azienda</h3>
-              <div style={{display:"flex",flexDirection:"column",gap:"14px",color:"#9ca3af",fontSize:"14px"}}>
+              <h3 style={{ marginBottom: "20px", fontSize: "17px" }}>Azienda</h3>
+              <div style={{ display: "flex", flexDirection: "column", gap: "14px", color: "#9ca3af", fontSize: "14px" }}>
                 <span>Chi Siamo</span>
                 <span>Progetti</span>
                 <span>Partner</span>
@@ -826,26 +829,40 @@ export default function LuxuryConstructionWebsite() {
             </div>
 
             <div>
-              <h3 style={{marginBottom:"20px",fontSize:"17px"}}>Contatti</h3>
-              <div style={{display:"flex",flexDirection:"column",gap:"14px",color:"#9ca3af",fontSize:"14px"}}>
-                <span>📍 Milano, Italia</span>
-                <span>📞 +39 000 000 0000</span>
+              <h3 style={{ marginBottom: "20px", fontSize: "17px" }}>Contatti</h3>
+              <div style={{ display: "flex", flexDirection: "column", gap: "14px", color: "#9ca3af", fontSize: "14px" }}>
+                <span>📍 Via Padova 31, Milano 20127</span>
+                <span>📞 +3511858486</span>
                 <span>📧 contact@edildesigndisaleh.com</span>
               </div>
             </div>
           </div>
 
-          <div style={{height:"1px",background:"rgba(255,255,255,0.08)",marginBottom:"25px"}}></div>
+          <div style={{ height: "1px", background: "rgba(255,255,255,0.08)", marginBottom: "25px" }}></div>
 
-          <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",flexWrap:"wrap",gap:"20px"}}>
-            <p style={{color:"#777",fontSize:"13px"}}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "20px" }}>
+            <p style={{ color: "#777", fontSize: "13px" }}>
               © 2026 ITALBUILD — Tutti i diritti riservati.
             </p>
 
-            <div style={{display:"flex",gap:"14px"}}>
-              <a href="https://facebook.com" target="_blank" rel="noreferrer" style={{width:"42px",height:"42px",borderRadius:"12px",background:"rgba(255,255,255,0.05)",display:"flex",alignItems:"center",justifyContent:"center",textDecoration:"none",color:"white",transition:"0.3s"}}>FB</a>
-              <a href="https://instagram.com" target="_blank" rel="noreferrer" style={{width:"42px",height:"42px",borderRadius:"12px",background:"rgba(255,255,255,0.05)",display:"flex",alignItems:"center",justifyContent:"center",textDecoration:"none",color:"white",transition:"0.3s"}}>IG</a>
-              <a href="https://linkedin.com" target="_blank" rel="noreferrer" style={{width:"42px",height:"42px",borderRadius:"12px",background:"rgba(255,255,255,0.05)",display:"flex",alignItems:"center",justifyContent:"center",textDecoration:"none",color:"white",transition:"0.3s"}}>IN</a>
+            <div style={{ display: "flex", gap: "14px", alignItems: "center" }}>
+              <a
+                href="https://wa.me/3511858486"
+                target="_blank"
+                rel="noreferrer"
+                style={{ fontSize: "22px", color: "#25D366" }}
+              >
+                <FaWhatsapp />
+              </a>
+
+              <a
+                href="mailto:contact@edildesigndesaled.com"
+                target="_blank"
+                rel="noreferrer"
+                style={{ fontSize: "22px", color: "#EA4335" }}
+              >
+                <FaEnvelope />
+              </a>
             </div>
           </div>
         </div>

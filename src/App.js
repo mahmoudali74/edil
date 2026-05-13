@@ -44,10 +44,10 @@ export default function LuxuryConstructionWebsite() {
     return (
       <h2 className={`animated-title ${className}`}>
         {text.split("").map((char, index) => (
-          <span 
-            key={index} 
+          <span
+            key={index}
             className="letter"
-            style={{ 
+            style={{
               display: char === " " ? "inline-block" : "inline-block",
               minWidth: char === " " ? "0.3em" : "auto"
             }}
@@ -771,108 +771,86 @@ export default function LuxuryConstructionWebsite() {
           }
         }
 
-        @media(max-width: 768px){
-          .mobile-toggle{
-            display:block;
-          }
+       /* 📱 تابلت وموبايل */
+@media(max-width: 768px){
+  /* 1. تصغير النافبار وإزالة الشفافية الزائدة */
+  .navbar {
+    padding: 12px 0 !important;
+    background: rgba(5, 8, 22, 0.95) !important;
+    backdrop-filter: blur(15px) !important;
+  }
 
-          .nav-links{
-            position:fixed;
-            top:0;
-            right:-100%;
-            width:80%;
-            max-width:400px;
-            height:100vh;
-            background:rgba(10,10,10,0.98);
-            backdrop-filter:blur(20px);
-            flex-direction:column;
-            justify-content:center;
-            gap:40px;
-            transition:right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            border-left:1px solid rgba(212,175,55,0.2);
-          }
+  .nav-content {
+    padding: 0 15px;
+    align-items: center;
+  }
 
-          .nav-links.active{
-            right:0;
-          }
+  .mobile-toggle {
+    display: block;
+    font-size: 24px;
+    color: var(--gold-light);
+    padding: 5px;
+  }
 
-          .nav-links a{
-            font-size:20px;
-            font-weight:600;
-          }
+  .nav-links {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 80%;
+    max-width: 340px;
+    height: 100vh;
+    background: rgba(5, 8, 22, 0.98);
+    backdrop-filter: blur(20px);
+    flex-direction: column;
+    justify-content: center;
+    gap: 30px;
+    transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border-left: 1px solid rgba(212, 175, 55, 0.3);
+    padding: 0 25px;
+  }
 
-          .logo-img {
-            height: 75px;
-          }
+  .nav-links.active { right: 0; }
+  .nav-links a { font-size: 18px; font-weight: 600; }
 
-          section{
-            padding:80px 0;
-          }
+  /* 2. تكبير اللوجو وضبطه عشان يبان فخم وواضح */
+  .logo-img {
+    height: 65px !important;
+    width: auto;
+    filter: drop-shadow(0 3px 8px rgba(0,0,0,0.5));
+    margin: 0;
+  }
 
-          .hero h1{
-            font-size:32px;
-          }
+  /* 3. تقليل المسافة تحت النافبار عشان المحتوى يطلع فوق */
+  .hero { padding-top: 95px !important; }
+  section { padding: 70px 0; }
 
-          .section-title h2,
-          .about-text h2{
-            font-size:28px;
-          }
+  /* 4. ضبط الخطوط والأزرار للموبايل */
+  .hero h1 { font-size: 28px; line-height: 1.3; }
+  .hero p { font-size: 15px; }
+  .section-title h2, .about-text h2 { font-size: 26px; }
 
-          .buttons{
-            flex-direction:column;
-            width:100%;
-          }
+  .buttons { flex-direction: column; width: 100%; gap: 12px; }
+  .btn { width: 100%; text-align: center; padding: 14px 20px; font-size: 15px; }
 
-          .btn{
-            width:100%;
-            text-align:center;
-          }
+  .services-grid, .projects-grid { grid-template-columns: 1fr; gap: 20px; }
+  .project-card { height: 320px; }
+  .about img { height: 320px; }
+  .contact-form { padding: 25px 20px; }
+  .stats { grid-template-columns: 1fr; gap: 12px; }
+}
 
-          .services-grid,
-          .projects-grid{
-            grid-template-columns:1fr;
-          }
+/* 📱 موبايل صغير */
+@media(max-width: 480px){
+  .navbar { padding: 10px 0 !important; }
+  .logo-img { height: 55px !important; }
+  .container { width: 95%; }
 
-          .project-card{
-            height:350px;
-          }
-
-          .about img{
-            height:350px;
-          }
-
-          .contact-form{
-            padding:30px 20px;
-          }
-        }
-
-        @media(max-width: 480px){
-          .container{
-            width:95%;
-          }
-
-          .hero h1{
-            font-size:28px;
-          }
-
-          .section-title h2{
-            font-size:24px;
-          }
-
-          .service-card,
-          .testimonial{
-            padding:30px 25px;
-          }
-
-          .stat-box{
-            padding:25px 20px;
-          }
-
-          .footer{
-            padding:30px 20px;
-          }
-        }
-
+  .hero h1 { font-size: 24px; }
+  .section-title h2 { font-size: 22px; }
+  .service-card, .testimonial { padding: 25px 20px; }
+  .stat-box { padding: 20px 15px; }
+  .footer { padding: 25px 15px; }
+}
         /* Smooth reveal animation delay */
         .service-card:nth-child(1){transition-delay:0.1s;}
         .service-card:nth-child(2){transition-delay:0.2s;}
@@ -890,14 +868,14 @@ export default function LuxuryConstructionWebsite() {
       <nav className="navbar">
         <div className="container nav-content">
           <div className="logo">
-            <img 
-              src="assets/photo_2026-05-13_14-06-03.png" 
-              alt="EDIL DESIGN Logo" 
-              className="logo-img" 
+            <img
+              src="assets/photo_2026-05-13_14-06-03.png"
+              alt="EDIL DESIGN Logo"
+              className="logo-img"
             />
           </div>
 
-          <button 
+          <button
             className="mobile-toggle"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >

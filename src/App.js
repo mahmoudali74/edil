@@ -24,7 +24,6 @@ export default function LuxuryConstructionWebsite() {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           entry.target.classList.add("animate-in");
-          // Trigger letter animation for titles
           const letters = entry.target.querySelectorAll(".letter");
           letters.forEach((letter, index) => {
             setTimeout(() => {
@@ -41,7 +40,6 @@ export default function LuxuryConstructionWebsite() {
     return () => observer.disconnect();
   }, []);
 
-  // Helper function to create animated title with letter-by-letter effect
   const AnimatedTitle = ({ text, className = "" }) => {
     return (
       <h2 className={`animated-title ${className}`}>
@@ -115,6 +113,23 @@ export default function LuxuryConstructionWebsite() {
   return (
     <>
       <style>{`
+        :root {
+          --gold-primary: #D4AF37;
+          --gold-light: #F4E5A3;
+          --gold-dark: #B8942B;
+          --gold-gradient: linear-gradient(135deg, #F4E5A3 0%, #D4AF37 50%, #B8942B 100%);
+          --gold-gradient-reverse: linear-gradient(135deg, #D4AF37 0%, #F4E5A3 100%);
+          --white-base: #FFFFFF;
+          --white-soft: #F8F8F8;
+          --bg-dark: #0a0a0a;
+          --bg-darker: #050816;
+          --bg-card: rgba(255, 255, 255, 0.05);
+          --text-primary: #ffffff;
+          --text-secondary: #c7c7c7;
+          --gold-glow: rgba(212, 175, 55, 0.25);
+          --gold-glow-light: rgba(244, 229, 163, 0.15);
+        }
+
         *{
           margin:0;
           padding:0;
@@ -123,8 +138,8 @@ export default function LuxuryConstructionWebsite() {
         }
 
         body{
-          background:#050816;
-          color:white;
+          background:var(--bg-darker);
+          color:var(--text-primary);
           overflow-x:hidden;
         }
 
@@ -145,7 +160,7 @@ export default function LuxuryConstructionWebsite() {
           left:0;
           width:100%;
           padding:20px 0;
-          background:${scrolled ? 'rgba(5,8,22,0.95)' : 'rgba(5,8,22,0.3)'};
+          background:${scrolled ? 'rgba(10,10,10,0.95)' : 'rgba(10,10,10,0.3)'};
           backdrop-filter:${scrolled ? 'blur(20px)' : 'blur(12px)'};
           z-index:1000;
           border-bottom:1px solid rgba(255,255,255,${scrolled ? '0.1' : '0.08'});
@@ -157,13 +172,18 @@ export default function LuxuryConstructionWebsite() {
           justify-content:space-between;
           align-items:center;
         }
-.logo-img {
-  height: 110px;          /* ارتفاع ثابت يناسب الـ Navbar */
-  width: auto;           /* يحافظ على نسبة الأبعاد الأصلية */
-  max-width: 100%;       /* يمنع الخروج عن الإطار في الشاشات الصغيرة */
-  object-fit: contain;   /* يضمن عدم تشويه أو تمديد الصورة */
-}
 
+        .logo-img {
+          height: 100px;
+          width: auto;
+          max-width: 100%;
+          object-fit: contain;
+          filter: drop-shadow(0 2px 10px var(--gold-glow));
+          transition: transform 0.3s ease;
+        }
+        .logo-img:hover {
+          transform: scale(1.05);
+        }
 
         .nav-links{
           display:flex;
@@ -188,12 +208,12 @@ export default function LuxuryConstructionWebsite() {
           left:0;
           width:0;
           height:2px;
-          background:linear-gradient(90deg, #ff2d55, #3b82f6);
+          background:var(--gold-gradient);
           transition:width 0.3s ease;
         }
 
         .nav-links a:hover{
-          color:#fff;
+          color:var(--gold-light);
         }
 
         .nav-links a:hover::after{
@@ -205,11 +225,15 @@ export default function LuxuryConstructionWebsite() {
           display:none;
           background:none;
           border:none;
-          color:white;
+          color:var(--gold-light);
           font-size:28px;
           cursor:pointer;
           z-index:1001;
           padding:5px;
+          transition: transform 0.3s ease;
+        }
+        .mobile-toggle:hover {
+          transform: scale(1.1);
         }
 
         /* Hero Section */
@@ -218,9 +242,9 @@ export default function LuxuryConstructionWebsite() {
           display:flex;
           align-items:center;
           background:
-            radial-gradient(circle at top left, rgba(255,45,85,0.25), transparent 40%),
-            radial-gradient(circle at bottom right, rgba(59,130,246,0.2), transparent 40%),
-            #050816;
+            radial-gradient(circle at top left, var(--gold-glow-light), transparent 40%),
+            radial-gradient(circle at bottom right, rgba(212,175,55,0.12), transparent 40%),
+            var(--bg-darker);
           padding-top:120px;
           position:relative;
           overflow:hidden;
@@ -233,7 +257,7 @@ export default function LuxuryConstructionWebsite() {
           right:-20%;
           width:800px;
           height:800px;
-          background:radial-gradient(circle, rgba(255,45,85,0.1) 0%, transparent 70%);
+          background:radial-gradient(circle, var(--gold-glow) 0%, transparent 70%);
           animation:pulse 8s ease-in-out infinite;
         }
 
@@ -260,14 +284,14 @@ export default function LuxuryConstructionWebsite() {
         }
 
         .gradient{
-          background:linear-gradient(135deg,#ff2d55 0%,#3b82f6 100%);
+          background:var(--gold-gradient);
           -webkit-background-clip:text;
           -webkit-text-fill-color:transparent;
           display:inline-block;
         }
 
         .hero p{
-          color:#c7c7c7;
+          color:var(--text-secondary);
           line-height:1.9;
           font-size:clamp(16px, 2vw, 18px);
           margin-bottom:40px;
@@ -301,7 +325,7 @@ export default function LuxuryConstructionWebsite() {
           width:0;
           height:0;
           border-radius:50%;
-          background:rgba(255,255,255,0.3);
+          background:rgba(255,255,255,0.2);
           transform:translate(-50%, -50%);
           transition:width 0.6s, height 0.6s;
         }
@@ -312,16 +336,21 @@ export default function LuxuryConstructionWebsite() {
         }
 
         .btn-primary{
-          background:linear-gradient(135deg,#ff2d55 0%,#3b82f6 100%);
-          color:white;
-          box-shadow:0 10px 30px rgba(255,45,85,0.3);
+          background:var(--gold-gradient);
+          color:#0a0a0a;
+          box-shadow:0 10px 30px var(--gold-glow);
         }
 
         .btn-outline{
           background:transparent;
-          color:white;
-          border:2px solid rgba(255,255,255,0.3);
+          color:var(--gold-light);
+          border:2px solid var(--gold-light);
           backdrop-filter:blur(10px);
+        }
+
+        .btn-outline:hover{
+          background:rgba(212,175,55,0.1);
+          border-color:var(--gold-primary);
         }
 
         .btn:hover{
@@ -340,7 +369,8 @@ export default function LuxuryConstructionWebsite() {
           object-fit:cover;
           border-radius:35px;
           animation:float 6s ease-in-out infinite;
-          box-shadow:0 30px 60px rgba(0,0,0,0.5);
+          box-shadow:0 30px 60px rgba(0,0,0,0.5), 0 0 40px var(--gold-glow-light);
+          border:1px solid rgba(212,175,55,0.2);
         }
 
         @keyframes float{
@@ -376,7 +406,7 @@ export default function LuxuryConstructionWebsite() {
           opacity: 0;
           transform: translateY(50px) rotateX(90deg);
           display: inline-block;
-          background: linear-gradient(135deg, #fff 0%, #ff2d55 100%);
+          background: var(--gold-gradient);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           background-clip: text;
@@ -399,7 +429,7 @@ export default function LuxuryConstructionWebsite() {
         }
 
         .stat-box{
-          background:rgba(255,255,255,0.05);
+          background:var(--bg-card);
           border:1px solid rgba(255,255,255,0.1);
           border-radius:20px;
           padding:30px;
@@ -410,15 +440,15 @@ export default function LuxuryConstructionWebsite() {
 
         .stat-box:hover{
           transform:translateY(-8px);
-          background:rgba(255,255,255,0.08);
-          border-color:rgba(255,45,85,0.3);
-          box-shadow:0 20px 40px rgba(255,45,85,0.1);
+          background:rgba(244,229,163,0.08);
+          border-color:var(--gold-primary);
+          box-shadow:0 20px 40px var(--gold-glow);
         }
 
         .stat-box h2{
           font-size:clamp(28px, 4vw, 38px);
           margin-bottom:10px;
-          background:linear-gradient(135deg, #3b82f6, #ff2d55);
+          background:var(--gold-gradient);
           -webkit-background-clip:text;
           -webkit-text-fill-color:transparent;
         }
@@ -445,13 +475,13 @@ export default function LuxuryConstructionWebsite() {
           font-size:clamp(28px, 4vw, 42px);
           margin-bottom:20px;
           font-weight:800;
-          background:linear-gradient(135deg, #fff 0%, #ff2d55 100%);
+          background:var(--gold-gradient);
           -webkit-background-clip:text;
           -webkit-text-fill-color:transparent;
         }
 
         .section-title p{
-          color:#b3b3b3;
+          color:var(--text-secondary);
           max-width:700px;
           margin:auto;
           line-height:1.8;
@@ -469,7 +499,7 @@ export default function LuxuryConstructionWebsite() {
 
         .service-card,
         .testimonial{
-          background:rgba(255,255,255,0.05);
+          background:var(--bg-card);
           border:1px solid rgba(255,255,255,0.08);
           border-radius:28px;
           padding:40px;
@@ -488,9 +518,9 @@ export default function LuxuryConstructionWebsite() {
         .service-card:hover,
         .testimonial:hover{
           transform:translateY(-10px);
-          background:rgba(255,255,255,0.08);
-          border-color:rgba(255,45,85,0.3);
-          box-shadow:0 20px 50px rgba(0,0,0,0.3);
+          background:rgba(244,229,163,0.08);
+          border-color:var(--gold-primary);
+          box-shadow:0 20px 50px var(--gold-glow);
         }
 
         .service-icon{
@@ -501,9 +531,11 @@ export default function LuxuryConstructionWebsite() {
           justify-content:center;
           font-size:35px;
           border-radius:20px;
-          background:linear-gradient(135deg,#ff2d55,#3b82f6);
+          background:var(--gold-gradient);
+          color:#0a0a0a;
           margin-bottom:25px;
           transition:transform 0.3s ease;
+          font-weight:700;
         }
 
         .service-card:hover .service-icon{
@@ -514,11 +546,12 @@ export default function LuxuryConstructionWebsite() {
           font-size:clamp(20px, 2.5vw, 28px);
           margin-bottom:15px;
           font-weight:700;
+          color:var(--white-base);
         }
 
         .service-card p,
         .testimonial p{
-          color:#bdbdbd;
+          color:var(--text-secondary);
           line-height:1.9;
           font-size:15px;
         }
@@ -532,6 +565,7 @@ export default function LuxuryConstructionWebsite() {
           transition:all 0.5s ease;
           opacity:0;
           transform:translateY(30px);
+          border:1px solid rgba(212,175,55,0.15);
         }
 
         .project-card.animate-in{
@@ -541,7 +575,8 @@ export default function LuxuryConstructionWebsite() {
 
         .project-card:hover{
           transform:translateY(-10px);
-          box-shadow:0 30px 60px rgba(0,0,0,0.4);
+          box-shadow:0 30px 60px rgba(0,0,0,0.4), 0 0 30px var(--gold-glow-light);
+          border-color:var(--gold-primary);
         }
 
         .project-card img{
@@ -558,7 +593,7 @@ export default function LuxuryConstructionWebsite() {
         .overlay{
           position:absolute;
           inset:0;
-          background:linear-gradient(to top,rgba(5,8,22,0.95) 0%,transparent 60%);
+          background:linear-gradient(to top, rgba(10,10,10,0.98) 0%, transparent 60%);
           display:flex;
           align-items:flex-end;
           padding:35px;
@@ -571,6 +606,9 @@ export default function LuxuryConstructionWebsite() {
           transform:translateY(20px);
           opacity:0;
           transition:all 0.4s ease 0.1s;
+          background:var(--gold-gradient);
+          -webkit-background-clip:text;
+          -webkit-text-fill-color:transparent;
         }
 
         .project-card:hover .overlay h3{
@@ -595,8 +633,9 @@ export default function LuxuryConstructionWebsite() {
           border-radius:30px;
           height:600px;
           object-fit:cover;
-          box-shadow:0 30px 60px rgba(0,0,0,0.3);
+          box-shadow:0 30px 60px rgba(0,0,0,0.3), 0 0 40px var(--gold-glow-light);
           transition:transform 0.5s ease;
+          border:1px solid rgba(212,175,55,0.2);
         }
 
         .about img:hover{
@@ -607,10 +646,13 @@ export default function LuxuryConstructionWebsite() {
           font-size:clamp(28px, 4vw, 42px);
           margin-bottom:25px;
           font-weight:800;
+          background:var(--gold-gradient);
+          -webkit-background-clip:text;
+          -webkit-text-fill-color:transparent;
         }
 
         .about-text p{
-          color:#c7c7c7;
+          color:var(--text-secondary);
           line-height:2;
           margin-bottom:30px;
           font-size:16px;
@@ -618,23 +660,25 @@ export default function LuxuryConstructionWebsite() {
 
         .features div{
           margin-bottom:20px;
-          background:rgba(255,255,255,0.05);
+          background:var(--bg-card);
           padding:20px 25px;
           border-radius:16px;
           border:1px solid rgba(255,255,255,0.08);
           transition:all 0.3s ease;
           font-size:16px;
+          color:var(--text-secondary);
         }
 
         .features div:hover{
-          background:rgba(255,45,85,0.1);
-          border-color:rgba(255,45,85,0.3);
+          background:rgba(244,229,163,0.08);
+          border-color:var(--gold-primary);
           transform:translateX(10px);
+          color:var(--gold-light);
         }
 
         /* Contact */
         .contact{
-          background:linear-gradient(135deg,#0b1020,#081225);
+          background:linear-gradient(135deg, #0b1020, #0a0a0a);
         }
 
         .contact-box{
@@ -644,7 +688,7 @@ export default function LuxuryConstructionWebsite() {
         }
 
         .contact-form{
-          background:rgba(255,255,255,0.05);
+          background:var(--bg-card);
           padding:40px;
           border-radius:30px;
           border:1px solid rgba(255,255,255,0.08);
@@ -659,17 +703,22 @@ export default function LuxuryConstructionWebsite() {
           border-radius:16px;
           border:1px solid rgba(255,255,255,0.1);
           background:rgba(255,255,255,0.05);
-          color:white;
+          color:var(--white-base);
           outline:none;
           transition:all 0.3s ease;
           font-size:15px;
         }
 
+        .contact-form input::placeholder,
+        .contact-form textarea::placeholder{
+          color:rgba(255,255,255,0.5);
+        }
+
         .contact-form input:focus,
         .contact-form textarea:focus{
-          border-color:#ff2d55;
-          background:rgba(255,255,255,0.08);
-          box-shadow:0 0 0 3px rgba(255,45,85,0.1);
+          border-color:var(--gold-primary);
+          background:rgba(244,229,163,0.08);
+          box-shadow:0 0 0 3px var(--gold-glow);
         }
 
         /* Footer */
@@ -679,6 +728,20 @@ export default function LuxuryConstructionWebsite() {
           border-top:1px solid rgba(255,255,255,0.08);
           color:#999;
           background:#070b16;
+        }
+
+        .footer h2,
+        .footer h3{
+          color:var(--white-base);
+        }
+
+        .footer a{
+          color:var(--text-secondary);
+          transition:all 0.3s ease;
+        }
+
+        .footer a:hover{
+          color:var(--gold-light) !important;
         }
 
         /* Responsive Design */
@@ -720,13 +783,13 @@ export default function LuxuryConstructionWebsite() {
             width:80%;
             max-width:400px;
             height:100vh;
-            background:rgba(5,8,22,0.98);
+            background:rgba(10,10,10,0.98);
             backdrop-filter:blur(20px);
             flex-direction:column;
             justify-content:center;
             gap:40px;
             transition:right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            border-left:1px solid rgba(255,255,255,0.1);
+            border-left:1px solid rgba(212,175,55,0.2);
           }
 
           .nav-links.active{
@@ -737,9 +800,11 @@ export default function LuxuryConstructionWebsite() {
             font-size:20px;
             font-weight:600;
           }
-  .logo-img {
-    height: 65px;
-  }
+
+          .logo-img {
+            height: 75px;
+          }
+
           section{
             padding:80px 0;
           }
@@ -820,28 +885,35 @@ export default function LuxuryConstructionWebsite() {
         .project-card:nth-child(2){transition-delay:0.2s;}
         .project-card:nth-child(3){transition-delay:0.3s;}
       `}</style>
-<nav className="navbar">
-  <div className="container nav-content">
-    <div className="logo">
-      <img src="assets/photo_2026-05-13_14-06-03.png" alt="EDIL DESIGN Logo" className="logo-img" />
-    </div>
 
-    <button 
-      className="mobile-toggle"
-      onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-    >
-      {mobileMenuOpen ? <FaTimes /> : <FaBars />}
-    </button>
+      {/* Navbar */}
+      <nav className="navbar">
+        <div className="container nav-content">
+          <div className="logo">
+            <img 
+              src="assets/photo_2026-05-13_14-06-03.png" 
+              alt="EDIL DESIGN Logo" 
+              className="logo-img" 
+            />
+          </div>
 
-    <div className={`nav-links ${mobileMenuOpen ? 'active' : ''}`}>
-      <a href="#services" onClick={() => setMobileMenuOpen(false)}>Services</a>
-      <a href="#projects" onClick={() => setMobileMenuOpen(false)}>Projects</a>
-      <a href="#about" onClick={() => setMobileMenuOpen(false)}>About</a>
-      <a href="#contact" onClick={() => setMobileMenuOpen(false)}>Contact</a>
-    </div>
-  </div>
-</nav>
+          <button 
+            className="mobile-toggle"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          >
+            {mobileMenuOpen ? <FaTimes /> : <FaBars />}
+          </button>
 
+          <div className={`nav-links ${mobileMenuOpen ? 'active' : ''}`}>
+            <a href="#services" onClick={() => setMobileMenuOpen(false)}>Services</a>
+            <a href="#projects" onClick={() => setMobileMenuOpen(false)}>Projects</a>
+            <a href="#about" onClick={() => setMobileMenuOpen(false)}>About</a>
+            <a href="#contact" onClick={() => setMobileMenuOpen(false)}>Contact</a>
+          </div>
+        </div>
+      </nav>
+
+      {/* Hero Section */}
       <section className="hero">
         <div className="container hero-content">
           <div>
@@ -888,6 +960,7 @@ export default function LuxuryConstructionWebsite() {
         </div>
       </section>
 
+      {/* Services Section */}
       <section id="services">
         <div className="container">
           <div className="section-title animate-on-scroll">
@@ -909,6 +982,7 @@ export default function LuxuryConstructionWebsite() {
         </div>
       </section>
 
+      {/* About Section */}
       <section className="about" id="about">
         <div className="container about-grid">
           <img
@@ -934,6 +1008,7 @@ export default function LuxuryConstructionWebsite() {
         </div>
       </section>
 
+      {/* Advantages Section */}
       <section style={{ paddingTop: "40px", paddingBottom: "40px" }}>
         <div className="container">
           <div className="section-title animate-on-scroll">
@@ -965,6 +1040,7 @@ export default function LuxuryConstructionWebsite() {
         </div>
       </section>
 
+      {/* Stats Section */}
       <section style={{ background: "rgba(255,255,255,0.03)" }}>
         <div className="container">
           <div className="section-title animate-on-scroll">
@@ -993,6 +1069,7 @@ export default function LuxuryConstructionWebsite() {
         </div>
       </section>
 
+      {/* Projects Section */}
       <section id="projects">
         <div className="container">
           <div className="section-title animate-on-scroll">
@@ -1006,7 +1083,6 @@ export default function LuxuryConstructionWebsite() {
             {projects.map((project, index) => (
               <div className="project-card animate-on-scroll" key={index}>
                 <img src={project.image} alt={project.title} />
-
                 <div className="overlay">
                   <h3>{project.title}</h3>
                 </div>
@@ -1016,6 +1092,7 @@ export default function LuxuryConstructionWebsite() {
         </div>
       </section>
 
+      {/* Testimonials Section */}
       <section>
         <div className="container">
           <div className="section-title animate-on-scroll">
@@ -1047,6 +1124,7 @@ export default function LuxuryConstructionWebsite() {
         </div>
       </section>
 
+      {/* Contact Section */}
       <section className="contact" id="contact">
         <div className="container contact-box">
           <div className="animate-on-scroll">
@@ -1068,7 +1146,6 @@ export default function LuxuryConstructionWebsite() {
             <input type="text" placeholder="Full Name" />
             <input type="email" placeholder="Email Address" />
             <textarea rows="6" placeholder="Tell us about your project..."></textarea>
-
             <button className="btn btn-primary" style={{ width: "100%" }}>
               Invia Richiesta
             </button>
@@ -1076,7 +1153,8 @@ export default function LuxuryConstructionWebsite() {
         </div>
       </section>
 
-      <section style={{ background: "linear-gradient(135deg,#09111f,#10192f)", padding: "140px 0" }}>
+      {/* Process Section */}
+      <section style={{ background: "linear-gradient(135deg,#09111f,#0a0a0a)", padding: "140px 0" }}>
         <div className="container">
           <div className="section-title animate-on-scroll">
             <AnimatedTitle text="Processo di Lavoro" />
@@ -1089,30 +1167,25 @@ export default function LuxuryConstructionWebsite() {
             <div className="service-card animate-on-scroll">
               <div className="service-icon">1</div>
               <h3>Consulenza</h3>
-              <p>
-                Analizziamo il progetto e ascoltiamo le esigenze del cliente con attenzione.
-              </p>
+              <p>Analizziamo il progetto e ascoltiamo le esigenze del cliente con attenzione.</p>
             </div>
 
             <div className="service-card animate-on-scroll">
               <div className="service-icon">2</div>
               <h3>Progettazione</h3>
-              <p>
-                Creiamo design moderni e soluzioni innovative per ogni spazio.
-              </p>
+              <p>Creiamo design moderni e soluzioni innovative per ogni spazio.</p>
             </div>
 
             <div className="service-card animate-on-scroll">
               <div className="service-icon">3</div>
               <h3>Realizzazione</h3>
-              <p>
-                Il nostro team realizza il progetto con massima qualità e precisione.
-              </p>
+              <p>Il nostro team realizza il progetto con massima qualità e precisione.</p>
             </div>
           </div>
         </div>
       </section>
 
+      {/* Gallery Section */}
       <section>
         <div className="container">
           <div className="section-title animate-on-scroll">
@@ -1147,6 +1220,7 @@ export default function LuxuryConstructionWebsite() {
         </div>
       </section>
 
+      {/* Partners Section */}
       <section style={{ padding: "140px 0", background: "rgba(255,255,255,0.03)" }}>
         <div className="container">
           <div className="section-title animate-on-scroll">
@@ -1165,16 +1239,17 @@ export default function LuxuryConstructionWebsite() {
         </div>
       </section>
 
+      {/* CTA Section */}
       <section style={{ padding: "150px 0", position: "relative", overflow: "hidden" }}>
-        <div style={{ position: "absolute", top: "0", left: "0", width: "400px", height: "400px", background: "rgba(255,0,85,0.15)", filter: "blur(120px)", animation: "pulse 8s ease-in-out infinite" }}></div>
-        <div style={{ position: "absolute", bottom: "0", right: "0", width: "400px", height: "400px", background: "rgba(0,120,255,0.15)", filter: "blur(120px)", animation: "pulse 8s ease-in-out infinite 4s" }}></div>
+        <div style={{ position: "absolute", top: "0", left: "0", width: "400px", height: "400px", background: "var(--gold-glow)", filter: "blur(120px)", animation: "pulse 8s ease-in-out infinite" }}></div>
+        <div style={{ position: "absolute", bottom: "0", right: "0", width: "400px", height: "400px", background: "rgba(212,175,55,0.1)", filter: "blur(120px)", animation: "pulse 8s ease-in-out infinite 4s" }}></div>
 
         <div className="container" style={{ textAlign: "center", position: "relative", zIndex: "2" }}>
           <h2 style={{ fontSize: "clamp(32px, 5vw, 60px)", marginBottom: "25px", fontWeight: "900" }} className="animate-on-scroll">
-            Costruiamo il Futuro con Eleganza
+            Costruiamo il Futuro con <span className="gradient">Eleganza</span>
           </h2>
 
-          <p style={{ maxWidth: "850px", margin: "auto", lineHeight: "2", color: "#cfcfcf", fontSize: "clamp(16px, 2vw, 18px)" }} className="animate-on-scroll">
+          <p style={{ maxWidth: "850px", margin: "auto", lineHeight: "2", color: "var(--text-secondary)", fontSize: "clamp(16px, 2vw, 18px)" }} className="animate-on-scroll">
             Ogni progetto rappresenta innovazione, lusso e qualità italiana. La nostra missione è creare ambienti esclusivi che uniscono design moderno e funzionalità.
           </p>
 
@@ -1182,7 +1257,6 @@ export default function LuxuryConstructionWebsite() {
             <button className="btn btn-primary" style={{ marginRight: "20px", marginBottom: "15px" }}>
               Richiedi Preventivo
             </button>
-
             <button className="btn btn-outline">
               Guarda Progetti
             </button>
@@ -1190,12 +1264,13 @@ export default function LuxuryConstructionWebsite() {
         </div>
       </section>
 
+      {/* Footer */}
       <footer className="footer" style={{ background: "#070b16", padding: "90px 0 30px" }}>
         <div className="container">
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(220px,1fr))", gap: "40px", marginBottom: "60px", textAlign: "left" }}>
             <div>
               <h2 style={{ fontSize: "26px", fontWeight: "900", marginBottom: "20px" }}>
-                ITAL<span style={{ color: "#ff2d55" }}>BUILD</span>
+                EDIL<span style={{ background: "var(--gold-gradient)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>DESIGN</span>
               </h2>
               <p style={{ color: "#9ca3af", lineHeight: "1.9", fontSize: "14px" }}>
                 Azienda specializzata in costruzioni moderne e ristrutturazioni di lusso con design elegante.
@@ -1236,7 +1311,7 @@ export default function LuxuryConstructionWebsite() {
 
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "20px" }}>
             <p style={{ color: "#777", fontSize: "13px" }}>
-              © 2026 ITALBUILD — Tutti i diritti riservati.
+              © 2026 EDIL DESIGN — Tutti i diritti riservati.
             </p>
 
             <div style={{ display: "flex", gap: "14px", alignItems: "center" }}>
@@ -1250,12 +1325,11 @@ export default function LuxuryConstructionWebsite() {
               >
                 <FaWhatsapp />
               </a>
-
               <a
                 href="mailto:contact@edildesigndesaled.com"
                 target="_blank"
                 rel="noreferrer"
-                style={{ fontSize: "22px", color: "#EA4335", transition: "transform 0.3s ease" }}
+                style={{ fontSize: "22px", color: "var(--gold-light)", transition: "transform 0.3s ease" }}
                 onMouseEnter={(e) => e.target.style.transform = "scale(1.2)"}
                 onMouseLeave={(e) => e.target.style.transform = "scale(1)"}
               >

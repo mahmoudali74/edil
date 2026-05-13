@@ -1,529 +1,855 @@
-import React, { useState, useEffect } from 'react';
-import './App.css';
+import React from "react";
 
-const App = () => {
-  const [activeCategory, setActiveCategory] = useState('All');
-  const [scrollY, setScrollY] = useState(0);
-  const [visibleSections, setVisibleSections] = useState(new Set());
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
-      
-      const sections = document.querySelectorAll('section');
-      sections.forEach(section => {
-        const rect = section.getBoundingClientRect();
-        if (rect.top < window.innerHeight * 0.7) {
-          setVisibleSections(prev => new Set([...prev, section.id]));
-        }
-      });
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const products = [
-    { id: 1, name: 'Mint (Peppermint)', category: 'Herbs', image: 'https://images.unsplash.com/photo-1648036933917-762235e009c7?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8TWludCUyMChQZXBwZXJtaW50KXxlbnwwfHwwfHx8MA%3D%3D', featured: true },
-    { id: 2, name: 'Basil', category: 'Herbs', image: 'https://plus.unsplash.com/premium_photo-1725899523683-838307ab1552?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8YmFzaWx8ZW58MHx8MHx8fDA%3D', featured: false },
-    { id: 3, name: 'Parsley', category: 'Herbs', image: 'https://images.unsplash.com/photo-1590759485418-90509afec818?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8UGFyc2xleXxlbnwwfHwwfHx8MA%3D%3D', featured: false },
-    { id: 4, name: 'Dill', category: 'Herbs', image: 'https://images.unsplash.com/photo-1683295188245-dc46d5c2ffef?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZGlsbHxlbnwwfHwwfHx8MA%3D%3D', featured: false },
-    { id: 5, name: 'Coriander', category: 'Spices', image: 'https://images.unsplash.com/photo-1588879460618-9249e7d947d1?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y29yaWFuZGVyfGVufDB8fDB8fHww', featured: false },
-    { id: 6, name: 'Fennel', category: 'Spices', image: 'https://plus.unsplash.com/premium_photo-1723773767982-7456ce231368?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8RmVubmVsfGVufDB8fDB8fHww', featured: false },
-    { id: 7, name: 'Anise', category: 'Spices', image: 'https://plus.unsplash.com/premium_photo-1723917630278-1e2c02ac9516?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8QW5pc2V8ZW58MHx8MHx8fDA%3D', featured: false },
-    { id: 8, name: 'Cumin', category: 'Spices', image: 'https://plus.unsplash.com/premium_photo-1726862790171-0d6208559224?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Y3VtaW4lMjBwb3dkZXJ8ZW58MHx8MHx8fDA%3D', featured: false },
-    { id: 9, name: 'Hibiscus', category: 'Tea', image: 'https://images.unsplash.com/photo-1694545357525-624fda048319?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fEhpYmlzY3VzJTIwKFRCQyUyMCUyNiUyMEN1dCl8ZW58MHx8MHx8fDA%3D', featured: false },
-    { id: 10, name: 'Chamomile', category: 'Tea', image: 'https://images.unsplash.com/photo-1624041755997-393bd6b31f05?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8Q2hhbW9taWxlfGVufDB8fDB8fHww', featured: false },
-    { id: 11, name: 'Thyme', category: 'Herbs', image: 'https://images.unsplash.com/photo-1589562037508-ae76f4c445e2?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8VGh5bWV8ZW58MHx8MHx8fDA%3D', featured: false },
-    { id: 12, name: 'Rosemary', category: 'Herbs', image: 'https://images.unsplash.com/photo-1582745741856-1a5d68158ba3?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8Um9zZW1hcnl8ZW58MHx8MHx8fDA%3D', featured: false },
-    { id: 13, name: 'Sage', category: 'Herbs', image: 'https://images.unsplash.com/photo-1734367607096-9005870e78b7?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c2FnZSUyMHBsYW50fGVufDB8fDB8fHww', featured: false },
-{ id: 14, name: 'Licorice', category: 'Spices', image: 'https://images.unsplash.com/photo-1495548291205-c2a71a542583?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8TGljb3JpY2V8ZW58MHx8MHx8fDA%3D', featured: false },
-{ id: 15, name: 'Guava Leaves', category: 'Herbs', image: 'https://images.unsplash.com/photo-1758614256686-2b2e907f5892?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fEd1YXZhJTIwTGVhdmVzfGVufDB8fDB8fHww', featured: false },
-{ id: 16, name: 'Sesame Seeds', category: 'Seeds', image: 'https://plus.unsplash.com/premium_photo-1674654419404-667fcdd0fe13?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8U2VzYW1lJTIwU2VlZHN8ZW58MHx8MHx8fDA%3D', featured: false },
-{ id: 17, name: 'Sunflower Seeds', category: 'Seeds', image: 'https://plus.unsplash.com/premium_photo-1726072386964-62fe47163be7?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8U3VuZmxvd2VyJTIwU2VlZHN8ZW58MHx8MHx8fDA%3D', featured: false },
-{ id: 18, name: 'Nigella Seeds', category: 'Seeds', image: 'https://images.unsplash.com/photo-1717878192612-c3984b2b5fc8?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8TmlnZWxsYSUyMFNlZWRzfGVufDB8fDB8fHww', featured: false },
-{ id: 19, name: 'Molokhia', category: 'Herbs', image: 'https://th.bing.com/th/id/OIP.jGH4xDf0EXhV9RRy5mHiGQHaEf?w=287&h=180&c=7&r=0&o=7&pid=1.7&rm=3', featured: false },
-{ id: 20, name: 'Dried Lemon', category: 'Dried Products', image: 'https://plus.unsplash.com/premium_photo-1675011400590-c0274bf3bfbc?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8RHJpZWQlMjBMZW1vbnxlbnwwfHwwfHx8MA%3D%3D', featured: false },
+export default function LuxuryConstructionWebsite() {
+  const services = [
+    {
+      icon: "🏗️",
+      title: "Modern Construction",
+      desc: "Luxury modern construction with elegant European finishing.",
+    },
+    {
+      icon: "🎨",
+      title: "Professional Painting",
+      desc: "Premium painting solutions with modern colors and textures.",
+    },
+    {
+      icon: "⚡",
+      title: "Electrical Systems",
+      desc: "Certified electrical systems with high safety standards.",
+    },
+    {
+      icon: "🚿",
+      title: "Plumbing",
+      desc: "Professional plumbing and maintenance solutions.",
+    },
+    {
+      icon: "🧱",
+      title: "Drywall & Ceiling",
+      desc: "Luxury gypsum ceilings and creative interior walls.",
+    },
+    {
+      icon: "🏡",
+      title: "Full Renovation",
+      desc: "Complete renovation for villas and apartments.",
+    },
   ];
 
-  const categories = ['All', 'Herbs', 'Spices', 'Tea'];
-  
-  const filteredProducts = activeCategory === 'All' 
-    ? products 
-    : products.filter(p => p.category === activeCategory);
-
-  const stats = [
-    { number: '2100+', label: 'Tons Exported', icon: '🌍' },
-    { number: '2500', label: 'Tons Mint to EU', icon: '🚢' },
-    { number: '50+', label: 'Global Partners', icon: '🤝' },
-    { number: '20+', label: 'Years Experience', icon: '⏰' }
+  const projects = [
+    {
+      title: "Luxury Villa",
+      image:
+        "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1200&auto=format&fit=crop",
+    },
+    {
+      title: "Modern Apartment",
+      image:
+        "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=1200&auto=format&fit=crop",
+    },
+    {
+      title: "Premium Interior",
+      image:
+        "https://images.unsplash.com/photo-1600210492493-0946911123ea?q=80&w=1200&auto=format&fit=crop",
+    },
   ];
 
   return (
-    <div className="App">
-      {/* Navigation */}
-      <nav className={`navbar ${scrollY > 50 ? 'scrolled' : ''}`}>
-        <div className="nav-container">
+    <>
+      <style>{`
+
+        *{
+          margin:0;
+          padding:0;
+          box-sizing:border-box;
+          font-family:Arial, sans-serif;
+        }
+
+        body{
+          background:#050816;
+          color:white;
+          overflow-x:hidden;
+        }
+
+        html{
+          scroll-behavior:smooth;
+        }
+
+        .container{
+          width:90%;
+          max-width:1300px;
+          margin:auto;
+        }
+
+        .navbar{
+          position:fixed;
+          top:0;
+          left:0;
+          width:100%;
+          padding:20px 0;
+          background:rgba(0,0,0,0.4);
+          backdrop-filter:blur(12px);
+          z-index:1000;
+          border-bottom:1px solid rgba(255,255,255,0.08);
+        }
+
+        .nav-content{
+          display:flex;
+          justify-content:space-between;
+          align-items:center;
+        }
+
+        .logo{
+          font-size:30px;
+          font-weight:900;
+          letter-spacing:3px;
+        }
+
+        .logo span{
+          color:#ff2d55;
+        }
+
+        .nav-links a{
+          text-decoration:none;
+          color:white;
+          margin-left:30px;
+          transition:0.3s;
+          font-size:15px;
+        }
+
+        .nav-links a:hover{
+          color:#3b82f6;
+        }
+
+        .hero{
+          min-height:100vh;
+          display:flex;
+          align-items:center;
+          background:
+            radial-gradient(circle at top left, rgba(255,0,70,0.3), transparent 30%),
+            radial-gradient(circle at bottom right, rgba(0,100,255,0.3), transparent 30%),
+            #050816;
+          padding-top:120px;
+        }
+
+        .hero-content{
+          display:grid;
+          grid-template-columns:1fr 1fr;
+          gap:70px;
+          align-items:center;
+        }
+
+        .hero h1{
+          font-size:58px;
+          line-height:1.1;
+          margin-bottom:30px;
+          font-weight:900;
+        }
+
+        .gradient{
+          background:linear-gradient(to right,#ff2d55,#3b82f6);
+          -webkit-background-clip:text;
+          -webkit-text-fill-color:transparent;
+        }
+
+        .hero p{
+          color:#c7c7c7;
+          line-height:1.9;
+          font-size:18px;
+          margin-bottom:40px;
+        }
+
+        .buttons{
+          display:flex;
+          gap:20px;
+          flex-wrap:wrap;
+        }
+
+        .btn{
+          padding:16px 30px;
+          border:none;
+          border-radius:14px;
+          cursor:pointer;
+          font-size:16px;
+          transition:0.3s;
+          font-weight:bold;
+        }
+
+        .btn-primary{
+          background:linear-gradient(to right,#ff2d55,#3b82f6);
+          color:white;
+        }
+
+        .btn-outline{
+          background:transparent;
+          color:white;
+          border:1px solid rgba(255,255,255,0.2);
+        }
+
+        .btn:hover{
+          transform:translateY(-5px);
+        }
+
+        .hero-image{
+          position:relative;
+        }
+
+        .hero-image img{
+          width:100%;
+          height:700px;
+          object-fit:cover;
+          border-radius:35px;
+          animation:float 4s ease-in-out infinite;
+          box-shadow:0 20px 50px rgba(0,0,0,0.5);
+        }
+
+        @keyframes float{
+          0%{transform:translateY(0px)}
+          50%{transform:translateY(-10px)}
+          100%{transform:translateY(0px)}
+        }
+
+        .stats{
+          display:grid;
+          grid-template-columns:repeat(3,1fr);
+          gap:20px;
+          margin-top:50px;
+        }
+
+        .stat-box{
+          background:rgba(255,255,255,0.05);
+          border:1px solid rgba(255,255,255,0.08);
+          border-radius:20px;
+          padding:30px;
+          text-align:center;
+          transition:0.3s;
+        }
+
+        .stat-box:hover,
+        .service-card:hover,
+        .project-card:hover,
+        .testimonial:hover{
+          transform:translateY(-10px);
+        }
+
+        .stat-box h2{
+          font-size:38px;
+          margin-bottom:10px;
+          color:#3b82f6;
+        }
+
+        section{
+          padding:120px 0;
+        }
+
+        .section-title{
+          text-align:center;
+          margin-bottom:70px;
+        }
+
+        .section-title h2{
+          font-size:42px;
+          margin-bottom:20px;
+        }
+
+        .section-title p{
+          color:#b3b3b3;
+          max-width:700px;
+          margin:auto;
+          line-height:1.8;
+        }
+
+        .services-grid,
+        .projects-grid,
+        .testimonial-grid{
+          display:grid;
+          grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+          gap:30px;
+        }
+
+        .service-card,
+        .testimonial{
+          background:rgba(255,255,255,0.05);
+          border:1px solid rgba(255,255,255,0.08);
+          border-radius:28px;
+          padding:40px;
+          transition:0.4s;
+          backdrop-filter:blur(10px);
+        }
+
+        .service-icon{
+          width:80px;
+          height:80px;
+          display:flex;
+          align-items:center;
+          justify-content:center;
+          font-size:35px;
+          border-radius:20px;
+          background:linear-gradient(to right,#ff2d55,#3b82f6);
+          margin-bottom:25px;
+        }
+
+        .service-card h3{
+          font-size:28px;
+          margin-bottom:15px;
+        }
+
+        .service-card p,
+        .testimonial p{
+          color:#bdbdbd;
+          line-height:1.9;
+        }
+
+        .project-card{
+          position:relative;
+          overflow:hidden;
+          border-radius:30px;
+          height:500px;
+          transition:0.4s;
+        }
+
+        .project-card img{
+          width:100%;
+          height:100%;
+          object-fit:cover;
+          transition:0.5s;
+        }
+
+        .project-card:hover img{
+          transform:scale(1.1);
+        }
+
+        .overlay{
+          position:absolute;
+          inset:0;
+          background:linear-gradient(to top,rgba(0,0,0,0.9),transparent);
+          display:flex;
+          align-items:flex-end;
+          padding:40px;
+        }
+
+        .overlay h3{
+          font-size:35px;
+        }
+
+        .about{
+          background:rgba(255,255,255,0.03);
+        }
+
+        .about-grid{
+          display:grid;
+          grid-template-columns:1fr 1fr;
+          gap:60px;
+          align-items:center;
+        }
+
+        .about img{
+          width:100%;
+          border-radius:30px;
+          height:600px;
+          object-fit:cover;
+        }
+
+        .about-text h2{
+          font-size:42px;
+          margin-bottom:25px;
+        }
+
+        .about-text p{
+          color:#c7c7c7;
+          line-height:2;
+          margin-bottom:30px;
+        }
+
+        .features div{
+          margin-bottom:20px;
+          background:rgba(255,255,255,0.05);
+          padding:20px;
+          border-radius:16px;
+          border:1px solid rgba(255,255,255,0.08);
+        }
+
+        .contact{
+          background:linear-gradient(to right,#0b1020,#081225);
+        }
+
+        .contact-box{
+          display:grid;
+          grid-template-columns:1fr 1fr;
+          gap:50px;
+        }
+
+        .contact-form{
+          background:rgba(255,255,255,0.05);
+          padding:40px;
+          border-radius:30px;
+          border:1px solid rgba(255,255,255,0.08);
+        }
+
+        .contact-form input,
+        .contact-form textarea{
+          width:100%;
+          margin-bottom:20px;
+          padding:18px;
+          border-radius:16px;
+          border:1px solid rgba(255,255,255,0.08);
+          background:rgba(255,255,255,0.04);
+          color:white;
+          outline:none;
+        }
+
+        .footer{
+          padding:40px;
+          text-align:center;
+          border-top:1px solid rgba(255,255,255,0.08);
+          color:#999;
+        }
+
+        @media(max-width:992px){
+
+          .hero-content,
+          .about-grid,
+          .contact-box{
+            grid-template-columns:1fr;
+          }
+
+          .hero h1{
+            font-size:38px;
+          }
+
+          .section-title h2,
+          .about-text h2{
+            font-size:40px;
+          }
+
+          .stats{
+            grid-template-columns:1fr;
+          }
+
+          .nav-links{
+            display:none;
+          }
+        }
+
+      `}</style>
+
+      <nav className="navbar">
+        <div className="container nav-content">
           <div className="logo">
-            <img src="/assets/17.03.2026_19.00.14_REC.png" alt="MS Herbs" className="logo-img" />
+            ITAL<span>BUILD</span>
           </div>
-          <ul className={`nav-links ${isMenuOpen ? 'active' : ''}`}>
-            {['Home', 'About', 'Products', 'Why Us', 'Contact'].map((item) => (
-              <li key={item}>
-                <a href={`#${item.toLowerCase().replace(' ', '-')}`}>{item}</a>
-              </li>
-            ))}
-          </ul>
-   
-          <button className="menu-toggle" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-            <span></span>
-            <span></span>
-            <span></span>
-          </button>
+
+          <div className="nav-links">
+            <a href="#services">Services</a>
+            <a href="#projects">Projects</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+          </div>
         </div>
       </nav>
-{/* Hero Section */}
-<section id="home" className="hero">
-  <div className="hero-bg">
-    <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=1920" alt="Background" />
-    <div className="overlay"></div>
-  </div>
-  
-  <div className="hero-content">
-    <div className="hero-badge animate-fade-in">
-      <span className="pulse">🌱</span>
-      Premium Egyptian Herbs & Spices
-    </div>
-    
-    <h1 className="animate-slide-up">
-      Nature's Finest
-      <span className="highlight">From Egypt to You</span>
-    </h1>
-    
-    <p className="animate-slide-up delay-1">
-      Delivering premium quality herbs and spices with purity, consistency, and trust.
-    </p>
 
-    {/* ✨ AI Achievement Badge - إضافة مميزة ✨ */}
-    <div className="ai-achievement-badge animate-slide-up delay-2">
-      <div className="badge-icon">
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-          <path d="M12 2a2 2 0 0 1 2 2c0 .74-.4 1.39-1 1.73V7h1a7 7 0 0 1 7 7h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v1a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-1H2a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h1a7 7 0 0 1 7-7h1V5.73c-.6-.34-1-.99-1-1.73a2 2 0 0 1 2-2z"/>
-          <circle cx="7.5" cy="14.5" r="1.5"/>
-          <circle cx="16.5" cy="14.5" r="1.5"/>
-        </svg>
-        <span className="badge-glow"></span>
-      </div>
-      <div className="badge-content">
-        <span className="badge-label">🏆 World First</span>
-        <p className="badge-text">
-          MS Herbs - The world's first company to utilize AI technology in drying, packaging, and processing of medicinal, aromatic herbs and spices
-        </p>
-      </div>
-    </div>
-    
-    <div className="hero-features animate-slide-up delay-3">
-      <div className="feature-item">
-        <span className="check">✓</span>
-        ISO & FDA Certified
-      </div>
-      <div className="feature-item">
-        <span className="check">✓</span>
-        Europe & Gulf Export
-      </div>
-      <div className="feature-item">
-        <span className="check">✓</span>
-        Best Market Prices
-      </div>
-    </div>
-    
-    <div className="hero-buttons animate-slide-up delay-4">
-      <a href="#contact" className="btn-primary">
-        <span>Get Your Quote</span>
-        <span className="arrow">→</span>
-      </a>
-      <a href="#products" className="btn-outline">
-        Explore Products
-      </a>
-    </div>
-  </div>
-  
-  <div className="scroll-down">
-    <div className="mouse">
-      <div className="wheel"></div>
-    </div>
-  </div>
-</section>
-      {/* Statistics */}
-      <section className="stats-section" id="stats">
-        <div className="container">
-          <div className="stats-grid">
-            {stats.map((stat, index) => (
-              <div 
-                key={index} 
-                className={`stat-card ${visibleSections.has('stats') ? 'visible' : ''}`}
-                style={{ transitionDelay: `${index * 0.1}s` }}
-              >
-                <div className="stat-icon">{stat.icon}</div>
-                <div className="stat-number">{stat.number}</div>
-                <div className="stat-label">{stat.label}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <section className="hero">
+        <div className="container hero-content">
+          <div>
+            <h1>
+              Costruiamo il tuo
+              <span className="gradient"> Spazio Perfetto</span>
+              <br />
+              con Design Moderno
+            </h1>
 
-      {/* About Section */}
-      <section id="about" className="about-section">
-        <div className="container">
-          <div className="about-grid">
-            <div className={`about-images ${visibleSections.has('about') ? 'slide-in-left' : ''}`}>
-              <div className="image-main">
-                
-              </div>
-            
-            </div>
-            
-            <div className={`about-content ${visibleSections.has('about') ? 'slide-in-right' : ''}`}>
-              <div className="section-tag">Who We Are</div>
-              <h2>Great Products Start with Great Origins</h2>
-              <p className="about-text">
-                We are dedicated to sourcing, processing, and exporting premium Egyptian herbs 
-                and spices that meet international standards while supporting sustainable agriculture.
-              </p>
-              
-              <div className="quality-list">
-                <div className="quality-item">
-                  <div className="quality-icon">✨</div>
-                  <div>
-                    <h4>High Purity</h4>
-                    <p>Carefully selected materials</p>
-                  </div>
-                </div>
-                <div className="quality-item">
-                  <div className="quality-icon">🌸</div>
-                  <div>
-                    <h4>Strong Aroma</h4>
-                    <p>Natural freshness preserved</p>
-                  </div>
-                </div>
-                <div className="quality-item">
-                  <div className="quality-icon">✓</div>
-                  <div>
-                    <h4>Consistent Quality</h4>
-                    <p>International standards met</p>
-                  </div>
-                </div>
-              </div>
-              
-              <div className="mission-vision">
-                <div className="mv-card">
-                  <div className="mv-icon">🎯</div>
-                  <div>
-                    <h4>Our Mission</h4>
-                    <p>Premium quality supporting sustainable agriculture</p>
-                  </div>
-                </div>
-                <div className="mv-card">
-                  <div className="mv-icon">👁️</div>
-                  <div>
-                    <h4>Our Vision</h4>
-                    <p>Globally recognized Egyptian exporter</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Featured Product */}
-      <section className="featured-section">
-        <div className="container">
-          <div className="featured-wrapper">
-            <div className="featured-badge">
-              <span className="star">⭐</span>
-              Featured: Organic Dried Mint
-            </div>
-            <h2>Our Best Seller</h2>
-            <p className="featured-desc">
-              Exported to EU • 5-25kg Packaging • ISO & FDA Certified • 2500+ tons exported
+            <p>
+              Realizziamo ville moderne, appartamenti di lusso e progetti esclusivi con standard europei, materiali premium e finiture eleganti.
             </p>
-            <a href="#contact" className="btn-primary">
-              Inquire Now
-              <span className="arrow">→</span>
-            </a>
+
+            <div className="buttons">
+              <button className="btn btn-primary">Inizia Progetto</button>
+              <button className="btn btn-outline">Scopri Servizi</button>
+            </div>
+
+            <div className="stats">
+              <div className="stat-box">
+                <h2>12+</h2>
+                <p>Anni di Esperienza</p>
+              </div>
+
+              <div className="stat-box">
+                <h2>650+</h2>
+                <p>Progetti Completati</p>
+              </div>
+
+              <div className="stat-box">
+                <h2>100%</h2>
+                <p>Clienti Soddisfatti</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="hero-image">
+            <img
+              src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=1200&auto=format&fit=crop"
+              alt="construction"
+            />
           </div>
         </div>
       </section>
 
-      {/* Products */}
-      <section id="products" className="products-section">
+      <section id="services">
         <div className="container">
-          <div className="section-header">
-            <div className="section-tag">Our Products</div>
-            <h2>Explore Our Range</h2>
-            <p>Premium quality herbs and spices from Egypt's finest farms</p>
+          <div className="section-title">
+            <h2>Servizi Premium</h2>
+            <p>
+              Servizi professionali di costruzione e ristrutturazione con tecnologie moderne e finiture di lusso.
+            </p>
           </div>
 
-          <div className="category-tabs">
-            {categories.map(cat => (
-              <button
-                key={cat}
-                className={`tab-btn ${activeCategory === cat ? 'active' : ''}`}
-                onClick={() => setActiveCategory(cat)}
-              >
-                {cat}
-              </button>
-            ))}
-          </div>
-
-          <div className="products-grid">
-            {filteredProducts.map((product, index) => (
-              <div 
-                key={product.id} 
-                className={`product-card ${product.featured ? 'featured' : ''} ${visibleSections.has('products') ? 'fade-in-up' : ''}`}
-                style={{ animationDelay: `${index * 0.05}s` }}
-              >
-                <div className="product-image">
-                  <img src={product.image} alt={product.name} />
-                  {product.featured && <div className="product-badge">★ Featured</div>}
-                  <div className="product-overlay">
-                    <button className="quick-view">Quick View</button>
-                  </div>
-                </div>
-                <div className="product-info">
-                  <span className="category">{product.category}</span>
-                  <h3>{product.name}</h3>
-                </div>
+          <div className="services-grid">
+            {services.map((service, index) => (
+              <div className="service-card" key={index}>
+                <div className="service-icon">{service.icon}</div>
+                <h3>{service.title}</h3>
+                <p>{service.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Why Choose Us */}
-      <section id="why-us" className="why-section">
-        <div className="container">
-          <div className="section-header">
-            <div className="section-tag">Why Choose Us</div>
-            <h2>The MS-Herbs Advantage</h2>
-          </div>
-          
-          <div className="why-grid">
-            {[
-              { icon: '✨', title: 'Premium Quality', desc: 'Only the finest selection' },
-              { icon: '🔬', title: 'Quality Control', desc: 'Rigorous testing' },
-              { icon: '💰', title: 'Best Prices', desc: 'Competitive rates' },
-              { icon: '⏱️', title: 'On-Time Delivery', desc: 'Worldwide shipping' },
-              { icon: '📦', title: 'Flexible Orders', desc: '5kg to bulk orders' },
-              { icon: '🌐', title: 'Global Experience', desc: 'Export expertise' },
-            ].map((item, index) => (
-              <div 
-                key={index} 
-                className={`why-card ${visibleSections.has('why-us') ? 'scale-in' : ''}`}
-                style={{ animationDelay: `${index * 0.08}s` }}
-              >
-                <div className="why-icon">{item.icon}</div>
-                <h3>{item.title}</h3>
-                <p>{item.desc}</p>
-              </div>
-            ))}
+      <section className="about" id="about">
+        <div className="container about-grid">
+          <img
+            src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=1200&auto=format&fit=crop"
+            alt="team"
+          />
+
+          <div className="about-text">
+            <h2>Perché Scegliere Noi</h2>
+
+            <p>
+              La nostra azienda combina innovazione, architettura moderna e materiali di alta qualità per creare progetti esclusivi ed eleganti.
+            </p>
+
+            <div className="features">
+              <div>✔ Finiture Italiane di Lusso</div>
+              <div>✔ Design Moderno ed Elegante</div>
+              <div>✔ Team Professionale Certificato</div>
+              <div>✔ Materiali Premium</div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Services */}
-      <section className="services-section">
+      <section style={{paddingTop:"40px",paddingBottom:"40px"}}>
         <div className="container">
-          <div className="section-header">
-            <div className="section-tag">Our Services</div>
-            <h2>Complete Support</h2>
+          <div className="section-title">
+            <h2>I Nostri Vantaggi</h2>
+            <p>
+              Offriamo qualità europea, design moderno e soluzioni innovative per ogni progetto.
+            </p>
           </div>
-          
+
           <div className="services-grid">
             <div className="service-card">
-              <div className="service-icon">🌱</div>
-              <h3>Sourcing</h3>
-              <p>Direct from trusted farmers</p>
+              <div className="service-icon">⏱️</div>
+              <h3>Consegna Rapida</h3>
+              <p>Rispettiamo sempre i tempi di consegna con massima precisione.</p>
             </div>
+
             <div className="service-card">
-              <div className="service-icon">⚙️</div>
-              <h3>Processing</h3>
-              <p>Modern facilities</p>
+              <div className="service-icon">🛡️</div>
+              <h3>Qualità Garantita</h3>
+              <p>Utilizziamo materiali premium e standard professionali europei.</p>
             </div>
+
             <div className="service-card">
-              <div className="service-icon">🚢</div>
-              <h3>Export</h3>
-              <p>Seamless logistics</p>
-            </div>
-            <div className="service-card">
-              <div className="service-icon">🔄</div>
-              <h3>Supply</h3>
-              <p>Year-round availability</p>
+              <div className="service-icon">✨</div>
+              <h3>Design Moderno</h3>
+              <p>Creiamo ambienti eleganti, moderni e funzionali.</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Export Markets */}
-      <section className="markets-section">
+      <section style={{background:"rgba(255,255,255,0.03)"}}>
         <div className="container">
-          <div className="section-header">
-            <div className="section-tag">Export Markets</div>
-            <h2>Global Reach</h2>
+          <div className="section-title">
+            <h2>Statistiche Aziendali</h2>
+            <p>
+              Numeri che dimostrano la nostra esperienza nel settore delle costruzioni.
+            </p>
           </div>
-          
-          <div className="markets-grid">
-            <div className="market-card">
-              <div className="market-icon">🇪</div>
-              <h3>European Union</h3>
+
+          <div className="stats">
+            <div className="stat-box">
+              <h2>850+</h2>
+              <p>Clienti Felici</p>
             </div>
-            <div className="market-card">
-              <div className="market-icon">🇬🇨</div>
-              <h3>Gulf Countries</h3>
+
+            <div className="stat-box">
+              <h2>15+</h2>
+              <p>Anni di Successo</p>
             </div>
-            <div className="market-card">
-              <div className="market-icon">🌏</div>
-              <h3>Middle East</h3>
-            </div>
-            <div className="market-card">
-              <div className="market-icon">🌍</div>
-              <h3>North Africa</h3>
+
+            <div className="stat-box">
+              <h2>24/7</h2>
+              <p>Supporto Professionale</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Contact */}
-      <section id="contact" className="contact-section">
+      <section id="projects">
         <div className="container">
-          <div className="contact-wrapper">
-            <div className="contact-info">
-              <div className="section-tag">Get In Touch</div>
-              <h2>Start Your Order Today</h2>
-              <p>Ready to partner with us? Contact us for a quote!</p>
-              
-              <div className="contact-details">
-                <div className="contact-item">
-                  <div className="contact-icon">📍</div>
-                  <div>
-                    <strong>Location</strong>
-                    <span>Egypt</span>
-                  </div>
-                </div>
-                <div className="contact-item">
-                  <div className="contact-icon">📧</div>
-                  <div>
-                    <strong>Email</strong>
-                    <span>operation-manager@ms-herbs.com</span>
-                    <br></br>
-                           <span>info@ms-herbs-eg.com</span>
-                  </div>
-                </div>
-                <div className="contact-item">
-                  <div className="contact-icon">📱</div>
-                  <div>
-                    <strong>Phone</strong>
-                    <span>+201550333069</span>
-                  </div>
+          <div className="section-title">
+            <h2>Progetti Recenti</h2>
+            <p>
+              Scopri ville moderne, appartamenti esclusivi e interni eleganti realizzati con precisione.
+            </p>
+          </div>
+
+          <div className="projects-grid">
+            {projects.map((project, index) => (
+              <div className="project-card" key={index}>
+                <img src={project.image} alt={project.title} />
+
+                <div className="overlay">
+                  <h3>{project.title}</h3>
                 </div>
               </div>
-              
-              <div className="certifications">
-                <h4>Certifications:</h4>
-                <div className="cert-badges">
-                  <span className="cert-badge">ISO Certified</span>
-                  <span className="cert-badge">FDA Approved</span>
-                </div>
-              </div>
-            </div>
-            
-            <form className="contact-form">
-              <div className="form-group">
-                <input type="text" placeholder="Your Name" required />
-              </div>
-              <div className="form-group">
-                <input type="email" placeholder="Your Email" required />
-              </div>
-              <div className="form-group">
-                <textarea placeholder="Your Message" rows="4" required></textarea>
-              </div>
-              <button type="submit" className="btn-primary btn-full">
-                Send Message
-                <span className="arrow">→</span>
-              </button>
-            </form>
+            ))}
           </div>
         </div>
       </section>
-<footer className="footer">
-  <div className="container">
-    <div className="footer-top">
-      
-      <div className="footer-brand">
-        {/* ✨ اسم الشركة مع أيقونة مميزة ✨ */}
-        <div className="footer-logo-text">
-        
-          <span className="logo-name">
-            MS <span className="logo-accent">Herbs</span>
-          </span>
-        </div>
-        
-        <p>Premium Egyptian Herbs & Spices Exporter. Delivering quality and excellence from Egypt to the world.</p>
-        
-        <div className="social-links">
-          <a href="https://www.facebook.com/profile.php?id=61565730876093" target="_blank" rel="noopener noreferrer" className="social-link facebook" aria-label="Facebook">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-            </svg>
-          </a>
-          <a href="https://wa.me/201550333069" target="_blank" rel="noopener noreferrer" className="social-link whatsapp" aria-label="WhatsApp">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M20.52 3.48a11.892 11.892 0 0 0-16.8 16.8l-1.86 6.8 6.94-1.82a11.892 11.892 0 0 0 16.8-16.8zM12 21.5c-1.4 0-2.76-.36-3.96-1.05l-.28-.17-4.12 1.08 1.1-4.03-.18-.28a9.518 9.518 0 1 1 7.44 4.45zm5.4-7.35c-.3-.15-1.77-.87-2.05-.97-.28-.1-.48-.15-.68.15-.2.3-.77.97-.95 1.17-.17.2-.35.22-.65.07-.3-.15-1.27-.47-2.42-1.49-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.53.15-.17.2-.28.3-.47.1-.2.05-.37-.03-.52-.08-.15-.68-1.63-.93-2.23-.25-.59-.5-.51-.68-.52-.17 0-.37-.01-.57-.01s-.52.08-.79.37c-.27.28-1.04 1.02-1.04 2.49s1.07 2.88 1.22 3.08c.15.2 2.1 3.2 5.1 4.49.71.31 1.26.5 1.69.64.71.23 1.36.2 1.87.12.57-.09 1.77-.72 2.02-1.42.25-.7.25-1.3.18-1.42-.07-.13-.27-.2-.57-.35z"/>
-            </svg>
-          </a>
-        </div>
-      </div>
-      
-      <div className="footer-links">
-        <h4>Quick Links</h4>
-        <ul>
-          <li><a href="#home">Home</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#products">Products</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </div>
-      
-      <div className="footer-contact">
-        <h4>Contact</h4>
-        <div className="footer-contact-item">
-          <span className="icon">📧</span>
-          <div className="contact-text">
-             <p>operation-manager@ms-herbs.com</p>
-             <p>info@ms-herbs-eg.com</p>
+
+      <section>
+        <div className="container">
+          <div className="section-title">
+            <h2>Recensioni Clienti</h2>
+            <p>
+              Scelti da clienti che desiderano qualità, eleganza e professionalità.
+            </p>
+          </div>
+
+          <div className="testimonial-grid">
+            <div className="testimonial">
+              <p>
+                Incredible quality and professional execution. The team transformed our villa into a modern masterpiece.
+              </p>
+            </div>
+
+            <div className="testimonial">
+              <p>
+                Elegant design, clean finishing and outstanding project management from start to finish.
+              </p>
+            </div>
+
+            <div className="testimonial">
+              <p>
+                One of the best construction companies we worked with in Italy.
+              </p>
+            </div>
           </div>
         </div>
-        <div className="footer-contact-item">
-          <span className="icon">📱</span>
-          <p>+201550333069</p>
+      </section>
+
+      <section className="contact" id="contact">
+        <div className="container contact-box">
+          <div>
+            <div className="section-title" style={{ textAlign: "left" }}>
+              <h2>Contattaci</h2>
+              <p>
+                Trasformiamo insieme le tue idee in realtà moderne ed eleganti.
+              </p>
+            </div>
+
+            <div className="features">
+              <div>📞 +39 000 000 0000</div>
+              <div>📧 contact@italbuild.com</div>
+              <div>📍 Milan, Italy</div>
+            </div>
+          </div>
+
+          <div className="contact-form">
+            <input type="text" placeholder="Full Name" />
+            <input type="email" placeholder="Email Address" />
+            <textarea rows="6" placeholder="Tell us about your project..."></textarea>
+
+            <button className="btn btn-primary" style={{ width: "100%" }}>
+              Invia Richiesta
+            </button>
+          </div>
         </div>
-        <div className="footer-contact-item">
-          <span className="icon">📍</span>
-          <p>Sumusta, Beni Suef Governorate</p>
+      </section>
+
+      <section style={{background:"linear-gradient(to right,#09111f,#10192f)",padding:"140px 0"}}>
+        <div className="container">
+          <div className="section-title">
+            <h2>Processo di Lavoro</h2>
+            <p>
+              Seguiamo un processo professionale per garantire qualità, precisione e risultati eccezionali.
+            </p>
+          </div>
+
+          <div className="services-grid">
+            <div className="service-card">
+              <div className="service-icon">1</div>
+              <h3>Consulenza</h3>
+              <p>
+                Analizziamo il progetto e ascoltiamo le esigenze del cliente con attenzione.
+              </p>
+            </div>
+
+            <div className="service-card">
+              <div className="service-icon">2</div>
+              <h3>Progettazione</h3>
+              <p>
+                Creiamo design moderni e soluzioni innovative per ogni spazio.
+              </p>
+            </div>
+
+            <div className="service-card">
+              <div className="service-icon">3</div>
+              <h3>Realizzazione</h3>
+              <p>
+                Il nostro team realizza il progetto con massima qualità e precisione.
+              </p>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-    
-    <div className="footer-bottom">
-      <p>&copy; 2026 MS-Herbs. All rights reserved.</p>
-    </div>
-  </div>
-</footer>
-    </div>
+      </section>
+
+      <section>
+        <div className="container">
+          <div className="section-title">
+            <h2>Galleria Moderna</h2>
+            <p>
+              Alcuni esempi di design eleganti e ambienti moderni realizzati dal nostro team.
+            </p>
+          </div>
+
+          <div className="projects-grid">
+            <div className="project-card">
+              <img src="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?q=80&w=1200&auto=format&fit=crop" alt="gallery" />
+              <div className="overlay">
+                <h3>Villa Moderna</h3>
+              </div>
+            </div>
+
+            <div className="project-card">
+              <img src="https://images.unsplash.com/photo-1600566752355-35792bedcfea?q=80&w=1200&auto=format&fit=crop" alt="gallery" />
+              <div className="overlay">
+                <h3>Interni di Lusso</h3>
+              </div>
+            </div>
+
+            <div className="project-card">
+              <img src="https://images.unsplash.com/photo-1600607687644-c7171b42498f?q=80&w=1200&auto=format&fit=crop" alt="gallery" />
+              <div className="overlay">
+                <h3>Architettura Elegante</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section style={{padding:"140px 0",background:"rgba(255,255,255,0.03)"}}>
+        <div className="container">
+          <div className="section-title">
+            <h2>I Nostri Partner</h2>
+            <p>
+              Collaboriamo con aziende e fornitori di alta qualità per garantire risultati eccellenti.
+            </p>
+          </div>
+
+          <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(180px,1fr))",gap:"25px"}}>
+            <div className="stat-box"><h3>ITALCEMENTI</h3></div>
+            <div className="stat-box"><h3>EURO DESIGN</h3></div>
+            <div className="stat-box"><h3>LUX HOUSE</h3></div>
+            <div className="stat-box"><h3>MODERN BUILD</h3></div>
+          </div>
+        </div>
+      </section>
+
+      <section style={{padding:"150px 0",position:"relative",overflow:"hidden"}}>
+        <div style={{position:"absolute",top:"0",left:"0",width:"400px",height:"400px",background:"rgba(255,0,85,0.15)",filter:"blur(120px)"}}></div>
+        <div style={{position:"absolute",bottom:"0",right:"0",width:"400px",height:"400px",background:"rgba(0,120,255,0.15)",filter:"blur(120px)"}}></div>
+
+        <div className="container" style={{textAlign:"center",position:"relative",zIndex:"2"}}>
+          <h2 style={{fontSize:"60px",marginBottom:"25px",fontWeight:"900"}}>
+            Costruiamo il Futuro con Eleganza
+          </h2>
+
+          <p style={{maxWidth:"850px",margin:"auto",lineHeight:"2",color:"#cfcfcf",fontSize:"18px"}}>
+            Ogni progetto rappresenta innovazione, lusso e qualità italiana. La nostra missione è creare ambienti esclusivi che uniscono design moderno e funzionalità.
+          </p>
+
+          <div style={{marginTop:"50px"}}>
+            <button className="btn btn-primary" style={{marginRight:"20px"}}>
+              Richiedi Preventivo
+            </button>
+
+            <button className="btn btn-outline">
+              Guarda Progetti
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <footer className="footer" style={{background:"#070b16",padding:"90px 0 30px"}}>
+        <div className="container">
+          <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(220px,1fr))",gap:"40px",marginBottom:"60px",textAlign:"left"}}>
+            <div>
+              <h2 style={{fontSize:"26px",fontWeight:"900",marginBottom:"20px"}}>
+                ITAL<span style={{color:"#ff2d55"}}>BUILD</span>
+              </h2>
+              <p style={{color:"#9ca3af",lineHeight:"1.9",fontSize:"14px"}}>
+                Azienda specializzata in costruzioni moderne e ristrutturazioni di lusso con design elegante.
+              </p>
+            </div>
+
+            <div>
+              <h3 style={{marginBottom:"20px",fontSize:"17px"}}>Servizi</h3>
+              <div style={{display:"flex",flexDirection:"column",gap:"14px",color:"#9ca3af",fontSize:"14px"}}>
+                <span>Costruzioni Moderne</span>
+                <span>Ristrutturazioni</span>
+                <span>Design Interni</span>
+                <span>Impianti Premium</span>
+              </div>
+            </div>
+
+            <div>
+              <h3 style={{marginBottom:"20px",fontSize:"17px"}}>Azienda</h3>
+              <div style={{display:"flex",flexDirection:"column",gap:"14px",color:"#9ca3af",fontSize:"14px"}}>
+                <span>Chi Siamo</span>
+                <span>Progetti</span>
+                <span>Partner</span>
+                <span>Contatti</span>
+              </div>
+            </div>
+
+            <div>
+              <h3 style={{marginBottom:"20px",fontSize:"17px"}}>Contatti</h3>
+              <div style={{display:"flex",flexDirection:"column",gap:"14px",color:"#9ca3af",fontSize:"14px"}}>
+                <span>📍 Milano, Italia</span>
+                <span>📞 +39 000 000 0000</span>
+                <span>📧 contact@edildesigndisaleh.com</span>
+              </div>
+            </div>
+          </div>
+
+          <div style={{height:"1px",background:"rgba(255,255,255,0.08)",marginBottom:"25px"}}></div>
+
+          <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",flexWrap:"wrap",gap:"20px"}}>
+            <p style={{color:"#777",fontSize:"13px"}}>
+              © 2026 ITALBUILD — Tutti i diritti riservati.
+            </p>
+
+            <div style={{display:"flex",gap:"14px"}}>
+              <a href="https://facebook.com" target="_blank" rel="noreferrer" style={{width:"42px",height:"42px",borderRadius:"12px",background:"rgba(255,255,255,0.05)",display:"flex",alignItems:"center",justifyContent:"center",textDecoration:"none",color:"white",transition:"0.3s"}}>FB</a>
+              <a href="https://instagram.com" target="_blank" rel="noreferrer" style={{width:"42px",height:"42px",borderRadius:"12px",background:"rgba(255,255,255,0.05)",display:"flex",alignItems:"center",justifyContent:"center",textDecoration:"none",color:"white",transition:"0.3s"}}>IG</a>
+              <a href="https://linkedin.com" target="_blank" rel="noreferrer" style={{width:"42px",height:"42px",borderRadius:"12px",background:"rgba(255,255,255,0.05)",display:"flex",alignItems:"center",justifyContent:"center",textDecoration:"none",color:"white",transition:"0.3s"}}>IN</a>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </>
   );
-};
-
-export default App;
+}

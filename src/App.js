@@ -738,7 +738,7 @@ export default function LuxuryConstructionWebsite() {
             font-weight:600;
           }
   .logo-img {
-    height: 35px;
+    height: 65px;
   }
           section{
             padding:80px 0;

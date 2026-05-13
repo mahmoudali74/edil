@@ -436,7 +436,7 @@ export default function LuxuryConstructionWebsite() {
         <div className="container nav-content">
           {/* LOGO */}
           <div className="logo">
-            <img src="/photo_2026-05-13_14-06-03.jpg" alt="logo" />
+            <img src="public/photo_2026-05-13_14-06-03.jpg" alt="logo" />
           </div>
 
 

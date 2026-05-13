@@ -814,7 +814,7 @@ export default function LuxuryConstructionWebsite() {
 
   /* 2. تكبير اللوجو وضبطه عشان يبان فخم وواضح */
   .logo-img {
-    height: 65px !important;
+    height: 95px !important;
     width: auto;
     filter: drop-shadow(0 3px 8px rgba(0,0,0,0.5));
     margin: 0;
@@ -842,7 +842,7 @@ export default function LuxuryConstructionWebsite() {
 /* 📱 موبايل صغير */
 @media(max-width: 480px){
   .navbar { padding: 10px 0 !important; }
-  .logo-img { height: 55px !important; }
+  .logo-img { height: 95px !important; }
   .container { width: 95%; }
 
   .hero h1 { font-size: 24px; }

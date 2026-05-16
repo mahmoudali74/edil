@@ -659,7 +659,7 @@ export default function EdilDesignWebsite() {
           .nav-links.active { right: 0; }
           .nav-links a { color: var(--white); font-size: 17px; }
           .mobile-toggle { display: block; }
-          .logo-img { height: 120px; }
+          .logo-img { height: 150px ; }
           section { padding: 70px 0; }
           .buttons { flex-direction: column; width: 100%; }
           .btn { width: 100%; justify-content: center; padding: 16px 30px; }

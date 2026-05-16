@@ -48,9 +48,9 @@ export default function EdilDesignWebsite() {
 
   const services = [
     {
-      icon: "🏗️",
-      title: "Cartongesso Professionale",
-      desc: "Realizziamo pareti, controsoffitti e strutture in cartongesso moderne e funzionali.",
+      icon: "🏠",
+      title: "Cartongesso Interni", // تم التعديل هنا
+      desc: "Soluzioni complete in cartongesso per interni: pareti, controsoffitti e velette con finiture di alta qualità.", // تم التعديل هنا
       points: ["Pareti divisorie moderne", "Controsoffitti decorativi", "Isolamento termico e acustico", "Design personalizzati"],
       images: [
         "https://images.openai.com/static-rsc-4/JSUiPCHlsT5IncmJuIgIWHhmGIvHa515S2tZhA5wQEYzlBa6eSpqWZtuyqebTnGCFVBB4psrHXQU1pg_zdipgZneDiW5zVlslDR0lppbuIBIfVrTyU3pq62G5dNRqJ7SUsJESbgg5IU4gBdU36f9CEcI6TVc7q58uOPDumBemGh2eYRPt7g1APul-DzVx4TX?purpose=fullsize",
@@ -64,9 +64,9 @@ export default function EdilDesignWebsite() {
       desc: "Prepariamo le superfici con tecniche professionali di stuccatura e rasatura.",
       points: ["Superfici lisce e uniformi", "Materiali di alta qualità", "Preparazione perfetta per la pittura", "Lavorazione precisa", "Risultati durevoli nel tempo"],
       images: [
-        "https://images.openai.com/static-rsc-4/ibzUhpoMj0qjO7UICCN_TVoDbaR1mwdBv1T3rOzSvDridz-mNUkOc5xNH0ey7GZ1UjeimvuX4Hi5bdYz4XdK25Nw7AlKJzzhKKqEhBn0f60a_s9NBnR0J92nNOvGm2XP0EFy0ubYZMi8WC0GmSWSla6ieS1z9YF4ipy36K7quli7ui-OokUm0QF_wyHY_WwZ?purpose=inline",
-        "https://images.openai.com/static-rsc-4/nHigU7-8ke-JjwlGJV6jwVfokuyPJ_mf8Gv-gky0XRbJWhGTOxVfbCec9lmxWNaIjKwHcp-vCc3ln29Zh7ch_MVibkazdpoZicyugVADx4J28EzxA1uJrZdfqEF5SN6sFmORAWhAKRmJki0Bl0kt8r9TXSXAH2YlsG2cNk4KODdZf9V0Wz3nplipfvWxQUTA?purpose=inline",
-        "https://images.openai.com/static-rsc-4/07BKulW0SDcKAJRUjquUPZkBrIoEtIx61M9mhCd2ieMSoOhZ2BuPJ3Y0Cpn-2vOl-n09GVEJ3HeCt7CLk-Xk3_K9RrNG4oTAjprmd6ajEmZBtWMQr0CQqkmjQcoIG3UG74hrHGO10myxBXpJX-4Dqy2J4wd7M92z2LBnmoa6jMTl_L32H8hLtYmO6XMeqRAf?purpose=fullsize"
+        "/assets/photo_2026-05-16_16-50-31.jpg",
+        "/assets/photo_2026-05-16_16-50-39.jpg",
+        "/assets/photo_2026-05-16_16-50-42.jpg",
       ]
     },
     {
@@ -97,9 +97,10 @@ export default function EdilDesignWebsite() {
       desc: "Lavori di pittura interna ed esterna con finiture moderne e materiali di qualità.",
       points: ["Pittura interna ed esterna", "Colori moderni ed eleganti", "Materiali professionali", "Finiture pulite e precise", "Soluzioni personalizzate"],
       images: [
-        "https://images.openai.com/static-rsc-4/Pnl_DfKIRmcbZY4A6qz0RYT0HJ_xfpPAxDO48AIZXV8eX8_xGbgjLfcVQil928feqgaU_AXzpN5tiJaNSOmi2nBgRODaSH2HwrwmYl15V5Eg0tkaSisy7OSCA03xax6DNVbxichIvHxqYUOpqDC13z-kKzJjkoY9BkoCNKBW53zBTiRWoLFjXDvFZc1lqQfG?purpose=inline",
-        "https://images.openai.com/static-rsc-4/FVnP4iVug5_XoRiU9eSOd6o6e3yEdwHWnQiSYCrHEp7_hfzvh0DrjVrTz_j0AAsj60P7eIlWBBqvgvYDugJR49IVJpiXbqFmot0FcA__rs5qeBCpz1AclO2L0HnujTUDR-j85XoA80I3QRGLRKUiaF6RNJSR9OaaP_yIgWT_8FmBBZx5bruecD7c4sVErhMl?purpose=fullsize",
-        "https://images.openai.com/static-rsc-4/KyVVzIlIqeNLD8rgpf7Kwrdp3GS2wbjgS1ExjIrCJFQ6q2XawJ3GKkJR7xmg7yX-5Q7-kWOgDruM5ICAHJoOoN5J6AnOS2xpfxNZCt5CLT0g1alHh4ozvp5cvWQLTvE5EexUu8Kvs9tZTa1m6CU41MUUhpPT-SIWZrIad4J82_hTxaa4_LD1KG-beBTiR2d0?purpose=fullsize"
+      
+        "/assets/photo_2026-05-16_16-50-46.jpg",
+        "/assets/photo_2026-05-16_16-50-49.jpg",
+        "/assets/photo_2026-05-16_16-50-55.jpg",
       ]
     }
   ];
@@ -738,7 +739,7 @@ export default function EdilDesignWebsite() {
               <span>✨</span> Edil Design
             </div>
             <h1>
-              Soluzioni professionali per <span className="gradient">finiture interne ed esterne</span>
+              Soluzioni professionali per <span className="gradient">finiture interne </span>
             </h1>
             <p>
               Edil Design è specializzata in lavori di ristrutturazione e finitura per abitazioni, uffici e spazi commerciali. Offriamo servizi completi con materiali di alta qualità e un team esperto capace di trasformare ogni ambiente in uno spazio moderno, elegante e funzionale.
@@ -805,8 +806,8 @@ export default function EdilDesignWebsite() {
                     </div>
                     <div className="service-gallery-wrapper">
                       <div className="gallery-main-image">
-                        <img 
-                          src={service.images[currentIndex]} 
+                        <img
+                          src={service.images[currentIndex]}
                           alt={`${service.title} - ${currentIndex + 1}`}
                           onError={handleImageError}
                         />
@@ -815,14 +816,14 @@ export default function EdilDesignWebsite() {
                         </div>
                         {service.images.length > 1 && (
                           <>
-                            <button 
+                            <button
                               className="gallery-nav prev"
                               onClick={() => prevImage(serviceIndex)}
                               disabled={currentIndex === 0}
                             >
                               <FaArrowLeft />
                             </button>
-                            <button 
+                            <button
                               className="gallery-nav next"
                               onClick={() => nextImage(serviceIndex)}
                               disabled={currentIndex === service.images.length - 1}
@@ -834,7 +835,7 @@ export default function EdilDesignWebsite() {
                       </div>
                       <div className="gallery-thumbnails">
                         {service.images.map((img, imgIndex) => (
-                          <div 
+                          <div
                             key={imgIndex}
                             className={`thumbnail ${imgIndex === currentIndex ? 'active' : ''}`}
                             onClick={() => setActiveImageIndex(prev => ({ ...prev, [serviceIndex]: imgIndex }))}
@@ -976,7 +977,7 @@ export default function EdilDesignWebsite() {
           <div className="footer-grid">
             <div className="footer-brand">
               <h2>EDIL<span className="gradient">DESIGN</span></h2>
-              <p>Soluzioni professionali per finiture interne ed esterne, con qualità, precisione e attenzione ai dettagli.</p>
+              <p>Soluzioni professionali per finiture interne , con qualità, precisione e attenzione ai dettagli.</p>
             </div>
             <div className="footer-col">
               <h3>Servizi</h3>

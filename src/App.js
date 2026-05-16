@@ -216,6 +216,90 @@ export default function EdilDesignWebsite() {
           box-shadow: 0 30px 60px rgba(0,0,0,0.15);
         }
 
+        /* Statistics Section - ITALIAN VERSION */
+        .statistics-section {
+          padding: 80px 0;
+          background: linear-gradient(135deg, var(--gray-light) 0%, var(--white) 100%);
+          position: relative;
+        }
+        
+        .statistics-header {
+          text-align: center;
+          margin-bottom: 50px;
+        }
+        
+        .statistics-badge {
+          display: inline-block;
+          background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+          color: var(--black);
+          padding: 8px 25px;
+          border-radius: 25px;
+          font-size: 13px;
+          font-weight: 700;
+          margin-bottom: 20px;
+          text-transform: uppercase;
+          letter-spacing: 1px;
+        }
+        
+        .statistics-title {
+          font-size: clamp(32px, 4vw, 42px);
+          font-weight: 800;
+          margin-bottom: 15px;
+          color: var(--black);
+        }
+        
+        .statistics-subtitle {
+          color: var(--gray-text);
+          font-size: 16px;
+          max-width: 600px;
+          margin: 0 auto;
+          line-height: 1.6;
+        }
+        
+        .statistics-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+          gap: 30px;
+          margin-top: 40px;
+        }
+        
+        .stat-card {
+          background: var(--white);
+          border-radius: 20px;
+          padding: 45px 35px;
+          text-align: center;
+          box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+          transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        
+        .stat-card.animate-in {
+          opacity: 1;
+          transform: translateY(0);
+        }
+        
+        .stat-card:hover {
+          transform: translateY(-10px);
+          box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        }
+        
+        .stat-number {
+          font-size: clamp(48px, 6vw, 64px);
+          font-weight: 800;
+          background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          margin-bottom: 15px;
+          line-height: 1;
+        }
+        
+        .stat-label {
+          color: var(--gray-text);
+          font-size: 16px;
+          font-weight: 500;
+        }
+
         /* Sections */
         section { padding: 90px 0; }
         .section-header { text-align: center; margin-bottom: 60px; }
@@ -594,6 +678,9 @@ export default function EdilDesignWebsite() {
           .contact-form { padding: 30px 25px; }
           .footer-grid { grid-template-columns: 1fr; gap: 35px; }
           .footer-bottom { flex-direction: column; text-align: center; }
+          .statistics-grid {
+            grid-template-columns: 1fr;
+          }
         }
 
         @media (max-width: 480px) {
@@ -611,6 +698,9 @@ export default function EdilDesignWebsite() {
           .thumbnail {
             width: 80px;
             height: 60px;
+          }
+          .stat-card {
+            padding: 35px 25px;
           }
         }
 
@@ -660,6 +750,31 @@ export default function EdilDesignWebsite() {
           </div>
           <div className="hero-image">
             <img src="/assets/photo_2026-05-16_15-32-38.jpg" alt="Construction" onError={handleImageError} />
+          </div>
+        </div>
+      </section>
+
+      {/* Statistics Section - ITALIAN VERSION ✨ */}
+      <section className="statistics-section">
+        <div className="container">
+          <div className="statistics-header animate-on-scroll">
+            <div className="statistics-badge">I Nostri Numeri</div>
+            <h2 className="statistics-title">Risultati che Parlano</h2>
+            <p className="statistics-subtitle">Numeri che dimostrano la nostra esperienza e affidabilità nel settore edile</p>
+          </div>
+          <div className="statistics-grid">
+            <div className="stat-card animate-on-scroll" style={{ transitionDelay: '0.1s' }}>
+              <div className="stat-number">850+</div>
+              <div className="stat-label">Clienti Soddisfatti</div>
+            </div>
+            <div className="stat-card animate-on-scroll" style={{ transitionDelay: '0.2s' }}>
+              <div className="stat-number">10+</div>
+              <div className="stat-label">Anni di Successo</div>
+            </div>
+            <div className="stat-card animate-on-scroll" style={{ transitionDelay: '0.3s' }}>
+              <div className="stat-number">24/7</div>
+              <div className="stat-label">Supporto Professionale</div>
+            </div>
           </div>
         </div>
       </section>

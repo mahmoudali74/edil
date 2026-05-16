@@ -659,7 +659,7 @@ export default function EdilDesignWebsite() {
           .nav-links.active { right: 0; }
           .nav-links a { color: var(--white); font-size: 17px; }
           .mobile-toggle { display: block; }
-          .logo-img { height: 150px ; }
+          .logo-img { height: 170px ;}
           section { padding: 70px 0; }
           .buttons { flex-direction: column; width: 100%; }
           .btn { width: 100%; justify-content: center; padding: 16px 30px; }
@@ -688,7 +688,7 @@ export default function EdilDesignWebsite() {
           .container { width: 95%; }
           .hero h1 { font-size: 32px; }
           .section-title { font-size: 28px; }
-          .logo-img { height: 100px; }
+          .logo-img { height: 140px ; }
           .project-card { height: 320px; }
           .whatsapp-fixed { bottom: 25px; right: 25px; }
           .whatsapp-btn { width: 60px; height: 60px; }

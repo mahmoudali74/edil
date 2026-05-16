@@ -1,59 +1,106 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
   <head>
-  <meta charset="utf-8" />
+    <meta charset="utf-8" />
+    
+    <!-- ✅ Favicon & App Icons - مصححة -->
+    <link rel="icon" type="image/png" href="%PUBLIC_URL%/assets/photo_2026-05-15_19-47-55.png" />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/assets/photo_2026-05-15_19-47-55.png" />
+    
+    <!-- ✅ Viewport & Theme -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="theme-color" content="#D4AF37" />
+    <meta name="msapplication-TileColor" content="#D4AF37" />
+    
+    <!-- ✅ SEO Meta Tags - Italian (تظهر في نتائج جوجل) -->
+    <meta name="description" content="Edil Design - Soluzioni professionali per finiture interne ed esterne: cartongesso, pittura, parquet, ceramica e ristrutturazioni a Milano e provincia. Preventivi gratuiti." />
+    <meta name="keywords" content="edilizia milano, finiture interne, cartongesso milano, pittura edile, parquet milano, ceramica, ristrutturazione casa, Edil Design, preventivi edilizia" />
+    <meta name="author" content="Edil Design" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="googlebot" content="index, follow" />
+    
+    <!-- ✅ Canonical URL (مهم لجوجل) -->
+    <link rel="canonical" href="https://edildesigndisaleh.com/" />
+    
+    <!-- ✅ Open Graph / Facebook & WhatsApp (تظهر عند المشاركة) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="it_IT" />
+    <meta property="og:url" content="https://edildesigndisaleh.com/" />
+    <meta property="og:site_name" content="Edil Design" />
+    <meta property="og:title" content="Edil Design | Finiture Interne ed Esterne Professionali a Milano" />
+    <meta property="og:description" content="🏠 Trasformiamo i tuoi spazi con qualità e precisione. ✨ Cartongesso • Pittura • Parquet • Ceramica • Ristrutturazioni. 📞 Preventivo gratuito: +351 185 8486" />
+    <meta property="og:image" content="%PUBLIC_URL%/assets/photo_2026-05-15_19-47-55.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:alt" content="Edil Design Logo - Finiture Professionali" />
+    
+    <!-- ✅ Twitter Card (تظهر عند المشاركة على تويتر/إكس) -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@edildesign" />
+    <meta name="twitter:title" content="Edil Design | Finiture Professionali a Milano" />
+    <meta name="twitter:description" content="Soluzioni professionali per finiture interne ed esterne. Cartongesso, pittura, parquet e ristrutturazioni." />
+    <meta name="twitter:image" content="%PUBLIC_URL%/assets/photo_2026-05-15_19-47-55.png" />
+    
+    <!-- ✅ Structured Data / Schema.org (تظهر في جوجل بشكل غني) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "Edil Design",
+      "image": "%PUBLIC_URL%/assets/photo_2026-05-15_19-47-55.png",
+      "description": "Soluzioni professionali per finiture interne ed esterne: cartongesso, pittura, parquet, ceramica e ristrutturazioni.",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Via Padova 31",
+        "addressLocality": "Milano",
+        "postalCode": "20127",
+        "addressCountry": "IT"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "45.4773",
+        "longitude": "9.2328"
+      },
+      "url": "https://edildesigndisaleh.com/",
+      "telephone": "+3511858486",
+      "priceRange": "$$",
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+          "opens": "08:00",
+          "closes": "20:00"
+        }
+      ],
+      "sameAs": [
+        "https://wa.me/3511858486"
+      ]
+    }
+    </script>
+    
+    <!-- ✅ Manifest -->
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    
+    <!-- ✅ Page Title (يظهر في تبويب المتصفح) -->
+    <title>Edil Design | Finiture Interne ed Esterne Professionali a Milano</title>
+    
+    <!-- ✅ Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;600;700;800&display=swap" rel="stylesheet" />
+    
+    <!-- ✅ Preload Logo for faster display -->
+    <link rel="preload" href="%PUBLIC_URL%/assets/photo_2026-05-15_19-47-55.png" as="image" />
+  </head>
   
-  <!-- Favicon & App Icons -->
-  <link rel="icon" type="image/png" href="/assets/photo_2026-05-15_19-47-55.png"
-  <link rel="apple-touch-icon" href="/assets/photo_2026-05-15_19-47-55.png"
-  
-  <!-- Viewport & Theme -->
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#D4AF37" />
-  
-  <!-- SEO Meta Tags - Italian -->
-  <meta name="description" content="Edil Design - Soluzioni professionali per finiture interne ed esterne: cartongesso, pittura, parquet, ceramica e ristrutturazioni a Milano e provincia." />
-  <meta name="keywords" content="edilizia, finiture, cartongesso, pittura, parquet, ceramica, ristrutturazione, Milano, Edil Design" />
-  <meta name="author" content="Edil Design" />
-  <meta name="robots" content="index, follow" />
-  
-  <!-- Open Graph / Facebook (للظهور بشكل احترافي عند المشاركة) -->
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://edildesigndisaleh.com/" />
-  <meta property="og:title" content="Edil Design | Finiture Interne ed Esterne Professionali" />
-  <meta property="og:description" content="Trasformiamo i tuoi spazi con qualità e precisione. Cartongesso, pittura, parquet e molto altro." />
-  <meta property="og:image" content="/assets/photo_2026-05-15_19-47-55.png"
-  <meta property="og:site_name" content="Edil Design" />
-  
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Edil Design | Finiture Professionali" />
-  <meta name="twitter:description" content="Soluzioni professionali per finiture interne ed esterne a Milano." />
-  <meta name="twitter:image" content="%PUBLIC_URL%/assets/logo-og.png" />
-  
-  <!-- Manifest -->
-  <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-  
-  <!-- Page Title -->
-  <title>Edil Design | Finiture Interne ed Esterne Professionali</title>
-  
-  <!-- Fonts (Optional - لتحسين الخطوط) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;600;700;800&display=swap" rel="stylesheet" />
-</head>
   <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <noscript>
+      <div style="text-align:center;padding:20px;font-family:sans-serif;">
+        <strong>Edil Design</strong><br/>
+        Per visualizzare questo sito è necessario abilitare JavaScript.
+      </div>
+    </noscript>
     <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
-
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
   </body>
 </html>
